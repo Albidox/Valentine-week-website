@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Kiss Day ❤️ | For You</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffe6f2 0%, #f0e6ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ff4081" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
+        }
+
+        /* Music Toggle (Simple) */
+        .music-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 107, 139, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: #ffe5f0;
+        }
+
+        .music-toggle i {
+            font-size: 1.5rem;
+            color: #ff6b8b;
+        }
+
+        /* Love Meter */
+        .love-meter {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            width: 250px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .meter-label {
+            font-size: 12px;
+            color: #ff66b2;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .meter-bar {
+            height: 10px;
+            background: #ffe6f2;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff66b2, #ff4081);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .meter-text {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Pages */
+        .pages-container {
+            min-height: 100vh;
+            padding: 80px 20px 120px;
+        }
+
+        .page {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Typography */
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ff4081;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ff66b2;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .page-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff4081;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #ff66b2;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .cta-btn {
+            background: linear-gradient(135deg, #ff4081, #ff80ab);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 64, 129, 0.4);
+        }
+
+        /* Page 2: Qualities */
+        .qualities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .quality-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quality-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255, 64, 129, 0.2);
+        }
+
+        .quality-icon {
+            font-size: 3rem;
+            color: #ff4081;
+            margin-bottom: 20px;
+        }
+
+        .quality-card h3 {
+            color: #ff4081;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .quality-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .quality-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            border-radius: 20px;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .quality-card:hover .quality-gif {
+            opacity: 0.2;
+        }
+
+        /* Secret Message */
+        .secret-message {
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .secret-text {
+            color: #ff66b2;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .secret-hearts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .secret-heart {
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: floatHeart 3s ease-in-out infinite;
+        }
+
+        .secret-heart:nth-child(2) { animation-delay: 0.5s; }
+        .secret-heart:nth-child(3) { animation-delay: 1s; }
+        .secret-heart:nth-child(4) { animation-delay: 1.5s; }
+        .secret-heart:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        .secret-heart:hover {
+            transform: scale(1.5) rotate(15deg);
+            animation: none;
+        }
+
+        .secret-heart:hover::after {
+            content: attr(data-message);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 64, 129, 0.95);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            z-index: 100;
+        }
+
+        .secret-reveal {
+            min-height: 50px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 245, 0.9));
+            border-radius: 15px;
+            margin-top: 10px;
+            font-style: italic;
+            color: #ff4081;
+            font-weight: 500;
+            text-align: center;
+            border: 2px dashed #ffb3d9;
+        }
+
+        /* Letter */
+        .letter-container {
+            position: relative;
+            margin: 40px auto;
+            width: 300px;
+            height: 200px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope:hover {
+            transform: translateY(-10px);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #ff99cc;
+            z-index: 2;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope-body {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 300px;
+            height: 100px;
+            background: #ffb3d9;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .envelope-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            z-index: 3;
+            font-size: 1.2rem;
+        }
+
+        .envelope-gif {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+            animation: letterOpen 0.5s ease;
+        }
+
+        .letter.active {
+            display: block;
+        }
+
+        .letter-content {
+            text-align: left;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .letter-content h3 {
+            color: #ff4081;
+            margin-bottom: 20px;
+        }
+
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-style: italic;
+            color: #ff66b2;
+            text-align: right;
+        }
+
+        .close-letter {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #ff4081;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-letter:hover {
+            transform: rotate(90deg);
+        }
+
+        .letter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+        }
+
+        .letter-overlay.active {
+            display: block;
+        }
+
+        /* Proposal */
+        .proposal-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 245, 0.9));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 700px;
+            box-shadow: 0 15px 35px rgba(255, 64, 129, 0.2);
+            border: 2px dashed #ff80ab;
+        }
+
+        .proposal-content h3 {
+            color: #ff4081;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .proposal-options {
+            margin-top: 30px;
+        }
+
+        .proposal-options p {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            color: #ff66b2;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .response-area {
+            margin-top: 50px;
+        }
+
+        .response-area h3 {
+            color: #ff4081;
+            margin-bottom: 30px;
+        }
+
+        .response-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .response-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .yes-response {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+        }
+
+        .maybe-response {
+            background: linear-gradient(135deg, #FF9800, #FFC107);
+            color: white;
+            position: relative;
+        }
+
+        .response-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Poof effect for escaping button */
+        .poof {
+            position: absolute;
+            pointer-events: none;
+            animation: poofEffect 0.5s ease-out;
+        }
+
+        @keyframes poofEffect {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .response-reactions {
+            min-height: 150px;
+        }
+
+        .reaction {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .reaction.active {
+            display: block;
+        }
+
+        .reaction-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .reaction-content i {
+            font-size: 3rem;
+            color: #ff4081;
+            margin-bottom: 20px;
+        }
+
+        .reaction-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .reaction-gif {
+            max-width: 200px;
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 10px;
+        }
+
+        /* Bubu Dudu Container */
+        .bubu-dudu-container {
+            background: linear-gradient(135deg, #fff0f5, #ffe4f2);
+            border-radius: 30px;
+            padding: 40px 20px;
+            margin: 50px auto;
+            max-width: 1000px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
+            border: 3px solid #ffb6c1;
+        }
+
+        .bubu-dudu-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ff69b4;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .bubu-dudu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-items: center;
+            align-items: end;
+        }
+
+        .bubu-dudu-item {
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 20px 15px 15px;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .bubu-dudu-item:hover {
+            transform: translateY(-15px);
+        }
+
+        .bubu-dudu-gif {
+            max-width: 180px;
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .bubu-dudu-item p {
+            color: #ff1493;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Memory containers */
+        .admiration-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #ff4081;
+            border-right: 5px solid #ff80ab;
+        }
+
+        .admiration-title {
+            color: #ff4081;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+        }
+
+        .admiration-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .admiration-point {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #fff5f8;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .admiration-point:hover {
+            background: #ffe6f2;
+            transform: translateX(10px);
+        }
+
+        .admiration-point i {
+            color: #ff4081;
+            font-size: 1.2rem;
+        }
+
+        .admiration-point p {
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Page 5 */
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background: #ff4081;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-card h3 {
+            color: #ff4081;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .step-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .step-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .closing-note {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 64, 129, 0.1);
+        }
+
+        .closing-note h3 {
+            color: #ff4081;
+            margin-bottom: 20px;
+        }
+
+        .closing-note p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .final-gif-container {
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .final-gif {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #ff4081, #ff80ab);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 64, 129, 0.4);
+        }
+
+        /* Navigation */
+        .page-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffb3d9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #ff4081;
+            transform: scale(1.2);
+        }
+
+        .nav-arrows {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-arrow {
+            background: #ff80ab;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+
+        .nav-arrow:hover {
+            background: #ff4081;
+            transform: scale(1.1);
+        }
+
+        .nav-arrow:disabled {
+            background: #ffb3d9;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-indicator {
+            color: #ff66b2;
+            font-weight: 600;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        /* Falling Hearts */
+        .falling-hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff80ab;
+            opacity: 0.7;
+            animation: falling linear infinite;
+        }
+
+        /* Background GIFs */
+        .gif-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .gif-bg {
+            position: absolute;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .gif-1 {
+            top: 10%;
+            left: 5%;
+            width: 200px;
+            animation: floatGif 20s infinite ease-in-out;
+        }
+
+        .gif-2 {
+            bottom: 15%;
+            right: 5%;
+            width: 150px;
+            animation: floatGif 25s infinite ease-in-out reverse;
+        }
+
+        @keyframes floatGif {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(5deg); }
+            66% { transform: translateY(20px) rotate(-5deg); }
+        }
+
+        .gif-container {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .love-birds-gif {
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Fireworks Canvas */
+        #fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes falling {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes letterOpen {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .qualities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .response-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .response-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .music-toggle {
+                top: 15px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .love-meter {
+                width: 200px;
+                padding: 10px;
+            }
+
+            .bubu-dudu-title {
+                font-size: 2.2rem;
+            }
+
+            .bubu-dudu-gif {
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .bubu-dudu-title {
+                font-size: 1.8rem;
+            }
+
+            .bubu-dudu-gif {
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Music Toggle Button -->
+    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+        <i class="fas fa-volume-mute" id="musicIcon"></i>
+    </div>
+
+    <!-- 
+    ==========================================
+    🎵 MUSIC SLOT - ADD YOUR MUSIC FILE HERE
+    ==========================================
+    INSTRUCTIONS:
+    Replace "YOUR_MUSIC_FILE.mp3" with your actual music filename
+    Example: <source src="romantic-song.mp3" type="audio/mpeg">
+    -->
+    <audio id="backgroundMusic" loop>
+        <source src="./gif/romantic-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 🖼️ GIF SLOT 1 - Background Floating Hearts (top-left) -->
+    <!--
+         INSTRUCTIONS:
+         Replace src="PLACEHOLDER1.gif" with your floating hearts GIF
+         Example: <img src="floating-hearts.gif" class="gif-bg gif-1" alt="Floating hearts">
+    -->
+    <div class="gif-background">
+        <img src="./gif/floating-hearts.gif" class="gif-bg gif-1" alt="Floating hearts">
+        
+        <!-- 🖼️ GIF SLOT 2 - Background Sparkle Hearts (bottom-right) -->
+        <!--
+             INSTRUCTIONS:
+             Replace src="PLACEHOLDER2.gif" with your sparkle hearts GIF
+        -->
+        <img src="./gif/sparkle-hearts.gif" class="gif-bg gif-2" alt="Sparkle hearts">
+    </div>
+
+    <!-- Love Progress Meter -->
+    <div class="love-meter">
+        <div class="meter-label">Our Journey Progress</div>
+        <div class="meter-bar">
+            <div class="meter-fill" id="meterFill"></div>
+        </div>
+        <div class="meter-text" id="meterText">Starting our journey...</div>
+    </div>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks"></canvas>
+
+    <!-- Pages Container -->
+    <div class="pages-container">
+        <!-- Page 1: Landing -->
+        <section class="page active" id="page1">
+            <!-- 🖼️ GIF SLOT 3 - Love Birds/Kiss GIF (Page 1 decoration) -->
+            <!--
+                 INSTRUCTIONS:
+                 Replace src="PLACEHOLDER3.gif" with your love birds/kiss themed GIF
+                 Example: <img src="love-kiss.gif" class="love-birds-gif" alt="Love animation">
+            -->
+            <div class="gif-container">
+                <img src="./gif/love-birds.gif" class="love-birds-gif" alt="Love birds animation">
+            </div>
+            
+            <div class="page-content">
+                <h1 class="title">Happy Kiss Day</h1>
+                <h2 class="subtitle">For Someone Very Special</h2>
+                
+                <div class="message">
+                    <p style="font-size: 1.3rem; color: #666; line-height: 1.8; max-width: 600px; margin: 40px auto;">
+                        This Kiss Day, I want to share something sweet with you...<br><br>
+                        A journey where I want to share my heart with you 💋
+                    </p>
+                </div>
+                
+                <button class="cta-btn" id="startJourneyBtn">
+                    <i class="fas fa-heart"></i> Start This Special Journey
+                </button>
+            </div>
+        </section>
+
+        <!-- Page 2: Kiss Day Wishes + Bubu Dudu -->
+        <section class="page" id="page2">
+            <div class="page-content">
+                <h2 class="page-title">Kiss Day Wishes</h2>
+                <p class="page-subtitle">All the reasons I'd love to kiss you</p>
+                
+                <div class="qualities-grid">
+                    <div class="quality-card">
+                        <div class="quality-icon"><i class="fas fa-lips"></i></div>
+                        <h3>Your Sweet Lips</h3>
+                        <p>They look so soft and inviting – I can't help but imagine kissing them.</p>
+                        <!-- 🖼️ GIF SLOT 4 - Quality Card Hover Effect (shows on hover) -->
+                        <img src="./gif/sparkle-hearts.gif" class="quality-gif" alt="Sparkle effect">
+                    </div>
+                    <div class="quality-card">
+                        <div class="quality-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                        <h3>Your Tender Touch</h3>
+                        <p>Every time you reach out, I feel a spark that makes me long for more.</p>
+                        <!-- 🖼️ GIF SLOT 4 - Same GIF for all quality cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="quality-gif" alt="Sparkle effect">
+                    </div>
+                    <div class="quality-card">
+                        <div class="quality-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Your Warm Embrace</h3>
+                        <p>Holding you close would be a dream – and a kiss would make it perfect.</p>
+                        <!-- 🖼️ GIF SLOT 4 - Same GIF for all quality cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="quality-gif" alt="Sparkle effect">
+                    </div>
+                    <div class="quality-card">
+                        <div class="quality-icon"><i class="fas fa-smile-wink"></i></div>
+                        <h3>Your Playful Spirit</h3>
+                        <p>Your laughter makes me want to steal a playful kiss.</p>
+                        <!-- 🖼️ GIF SLOT 4 - Same GIF for all quality cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="quality-gif" alt="Sparkle effect">
+                    </div>
+                    <div class="quality-card">
+                        <div class="quality-icon"><i class="fas fa-star"></i></div>
+                        <h3>Your Romantic Heart</h3>
+                        <p>You're the kind of person who makes every moment feel like a love scene.</p>
+                        <!-- 🖼️ GIF SLOT 4 - Same GIF for all quality cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="quality-gif" alt="Sparkle effect">
+                    </div>
+                    <div class="quality-card">
+                        <div class="quality-icon"><i class="fas fa-kiss-wink-heart"></i></div>
+                        <h3>Your Kissable Smile</h3>
+                        <p>That smile of yours is the one I'd love to kiss again and again.</p>
+                        <!-- 🖼️ GIF SLOT 4 - Same GIF for all quality cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="quality-gif" alt="Sparkle effect">
+                    </div>
+                </div>
+                
+                <!-- Bubu & Dudu Kiss Day Edition -->
+                <div class="bubu-dudu-container">
+                    <h3 class="bubu-dudu-title">💋 Kiss's For You!</h3>
+                    <div class="bubu-dudu-grid">
+                        <!-- 🖼️ GIF SLOT 5 - Bubu Dudu Hug GIF -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER5.gif" with your Bubu Dudu hug GIF
+                        -->
+                        <div class="bubu-dudu-item">
+                            <img src="./gif/bubu-dudu-hug.gif" alt="Bubu Dudu hugging" class="bubu-dudu-gif">
+                            <p>Hugs & Kisses!</p>
+                        </div>
+                        
+                        <!-- 🖼️ GIF SLOT 6 - Bubu Dudu Kiss GIF -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER6.gif" with your Bubu Dudu kiss GIF
+                        -->
+                        <div class="bubu-dudu-item">
+                            <img src="./gif/bubu-dudu-kiss.gif" alt="Bubu Dudu kissing" class="bubu-dudu-gif">
+                            <p>Blowing you a kiss!</p>
+                        </div>
+                        
+                        <!-- 🖼️ GIF SLOT 7 - Bubu Dudu Love GIF -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER7.gif" with your Bubu Dudu love GIF
+                        -->
+                        <div class="bubu-dudu-item">
+                            <img src="./gif/bubu-dudu-love.gif" alt="Bubu Dudu love" class="bubu-dudu-gif">
+                            <p>So many kisses!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admiration-container">
+                    <h3 class="admiration-title">Why I'd Love to Kiss You</h3>
+                    <div class="admiration-content">
+                        <div class="admiration-point"><i class="fas fa-check-circle"></i><p>The way you look at me makes my heart race</p></div>
+                        <div class="admiration-point"><i class="fas fa-check-circle"></i><p>Your gentle nature makes me feel safe</p></div>
+                        <div class="admiration-point"><i class="fas fa-check-circle"></i><p>I imagine your lips on mine every night</p></div>
+                        <div class="admiration-point"><i class="fas fa-check-circle"></i><p>Kissing you would be a dream come true</p></div>
+                    </div>
+                </div>
+                
+                <div class="secret-message">
+                    <p class="secret-text">Hover over the hearts for a secret kiss message</p>
+                    <div class="secret-hearts">
+                        <div class="secret-heart" data-message="I dream of kissing you under the stars">❤️</div>
+                        <div class="secret-heart" data-message="Your lips look incredibly soft">💖</div>
+                        <div class="secret-heart" data-message="One kiss from you would make my year">💗</div>
+                        <div class="secret-heart" data-message="I wonder what it would feel like to kiss you">💝</div>
+                        <div class="secret-heart" data-message="You're the only one I want to kiss today">💓</div>
+                    </div>
+                    <div class="secret-reveal" id="secretReveal"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: My Feelings -->
+        <section class="page" id="page3">
+            <div class="page-content">
+                <h2 class="page-title">My Feelings</h2>
+                <p class="page-subtitle">Words I've been wanting to share with you</p>
+                
+                <div class="letter-container">
+                    <div class="envelope" id="mainEnvelope">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body"></div>
+                        <div class="envelope-text">Open My Letter</div>
+                        <!-- 🖼️ GIF SLOT 8 - Envelope Sparkle Effect (behind envelope) -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER8.gif" with your sparkle/magic effect GIF
+                        -->
+                        <img src="./gif/sparkle-hearts.gif" class="envelope-gif" alt="Sparkle effect">
+                    </div>
+                    
+                    <div class="letter" id="loveLetter">
+                        <div class="letter-content">
+                            <h3>My Dearest Etu(Dhana),</h3>
+                            <p>On this Kiss Day, I finally gathered the courage to write what my heart has been whispering for so long.</p>
+                            <p>Every time we're together, I catch myself staring at your lips, wondering how magical it would be to press mine against them. Your smile, your laugh, the way you tilt your head – it all makes me imagine the softest, sweetest kiss.</p>
+                            <p>I don't know if you've ever thought about it, but I dream of a moment when we're close enough that a kiss feels natural – maybe under the moonlight, or just a quiet afternoon when our eyes meet and we both lean in.</p>
+                            <p>Today, on Kiss Day, I want you to know that if you ever felt the same, I'd be the happiest person to share that kiss with you.</p>
+                            <p class="signature">Yours hopefully,</p>
+                            <p class="signature">Someone who's been thinking of your lips</p>
+                        </div>
+                        <button class="close-letter" id="closeLetter"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: The Kiss Question (Friends option removed, Maybe button escapes) -->
+        <section class="page" id="page4">
+            <div class="page-content">
+                <h2 class="page-title">The Sweet Question</h2>
+                <p class="page-subtitle">Taking a chance on something beautiful</p>
+                
+                <div class="proposal-box">
+                    <div class="proposal-content">
+                        <h3>Will You Share a Kiss With Me?</h3>
+                        <p>I would be incredibly honored if you would consider...</p>
+                        <div class="proposal-options">
+                            <p>Sharing a sweet kiss?</p>
+                            <p>Making this Kiss Day unforgettable?</p>
+                            <p>Seeing where this connection could lead?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="response-area">
+                    <h3>Your Answer Would Mean The World</h3>
+                    <div class="response-buttons" id="responseButtons">
+                        <button class="response-btn yes-response" id="yesBtn">
+                            <i class="fas fa-heart"></i> Yes, I'd like that
+                        </button>
+                        <button class="response-btn maybe-response" id="maybeBtn">
+                            <i class="fas fa-question-circle"></i> Maybe, let's talk
+                        </button>
+                    </div>
+                    
+                    <div class="response-reactions">
+                        <div class="reaction" id="happyReaction">
+                            <div class="reaction-content">
+                                <!-- 🖼️ GIF SLOT 9 - Heart Explosion/Celebration GIF (shown when YES clicked) -->
+                                <!--
+                                     INSTRUCTIONS:
+                                     Replace src="PLACEHOLDER9.gif" with your celebration/heart explosion GIF
+                                -->
+                                <img src="./gif/heart-explosion.gif" class="reaction-gif" alt="Heart explosion">
+                                <p>That's amazing! A kiss to remember! 💋</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 5: Next Steps -->
+        <section class="page" id="page5">
+            <div class="page-content">
+                <h2 class="page-title">What Happens Next</h2>
+                <p class="page-subtitle">Regardless of your answer, I'm glad I shared this with you</p>
+                
+                <div class="next-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Take Your Time</h3>
+                        <p>There's no pressure at all. I just wanted to be honest about my feelings.</p>
+                        <!-- 🖼️ GIF SLOT 10 - Step Card Background Effect -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER10.gif" with your subtle sparkle effect GIF
+                             Note: Same GIF used for all 3 step cards
+                        -->
+                        <img src="./gif/sparkle-hearts.gif" class="step-gif" alt="Sparkle effect">
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Your Comfort Matters</h3>
+                        <p>However you feel, I respect it completely. Your happiness is what's important.</p>
+                        <!-- 🖼️ GIF SLOT 10 - Same GIF for all step cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="step-gif" alt="Sparkle effect">
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>No Awkwardness</h3>
+                        <p>I hope this doesn't make things awkward. I value our connection too much.</p>
+                        <!-- 🖼️ GIF SLOT 10 - Same GIF for all step cards -->
+                        <img src="./gif/sparkle-hearts.gif" class="step-gif" alt="Sparkle effect">
+                    </div>
+                </div>
+                
+                <div class="closing-note">
+                    <h3>Thank You</h3>
+                    <p>For taking the time to go through this. For being you. For existing in a way that made me want to be brave today.</p>
+                    
+                    <!-- 🖼️ GIF SLOT 11 - Final Romantic/Celebration GIF -->
+                    <!--
+                         INSTRUCTIONS:
+                         Replace src="PLACEHOLDER11.gif" with your final romantic/celebration GIF
+                         Recommended: Romantic fireworks, kiss animation, heart celebration
+                    -->
+                    <div class="final-gif-container">
+                        <img src="./gif/romantic-fireworks.gif" class="final-gif" alt="Romantic fireworks">
+                    </div>
+                    
+                  <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+    <button class="restart-btn" id="restartBtn">
+        <i class="fas fa-redo"></i> Experience This Again
+    </button>
+    <button class="restart-btn" id="homeBtn" style="background: linear-gradient(135deg, #4CAF50, #388E3C);">
+        <i class="fas fa-home"></i> Go Home
+    </button>
+</div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <div class="nav-dots">
+            <div class="nav-dot active" data-page="1"></div>
+            <div class="nav-dot" data-page="2"></div>
+            <div class="nav-dot" data-page="3"></div>
+            <div class="nav-dot" data-page="4"></div>
+            <div class="nav-dot" data-page="5"></div>
+        </div>
+        <div class="nav-arrows">
+            <button class="nav-arrow" id="prevBtn" disabled>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="page-indicator">Page <span id="currentPage">1</span> of 5</span>
+            <button class="nav-arrow" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Falling Hearts -->
+    <div class="falling-hearts-container"></div>
+
+    <script>
+        // ===== GLOBAL VARIABLES =====
+        let currentPage = 1;
+        let loveProgress = 0;
+        let musicStarted = false;
+        let maybeClickCount = 0;
+        const maxMaybeClicks = 5;
+
+        // ===== MUSIC CONTROL (AUTOPLAYS MUTED, STARTS ON "START JOURNEY") =====
+        const music = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+
+        function initMusic() {
+            music.volume = 0.5;
+            music.muted = true;
+            
+            // Try to autoplay muted
+            const playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('🎵 Music autoplaying (muted)');
+                }).catch(error => {
+                    console.log('Autoplay prevented:', error);
+                });
+            }
+        }
+
+      function startMusicOnFirstInteraction() {
+    if (!musicStarted) {
+        music.muted = false;
+        music.currentTime = 3; // Skip 3-second intro
+        music.play().then(() => {
+            musicStarted = true;
+            musicIcon.className = "fas fa-volume-up";
+            console.log("🎵 Music unmuted and playing!");
+        }).catch(error => {
+            console.log("Music play failed:", error);
+        });
+    }
+}
+
+
+        function toggleMusic() {
+            if (music.muted || music.paused) {
+                music.muted = false;
+                music.play();
+                musicIcon.className = 'fas fa-volume-up';
+                musicStarted = true;
+            } else {
+                music.muted = true;
+                musicIcon.className = 'fas fa-volume-mute';
+            }
+        }
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            initMusic();
+            initPageNavigation();
+            initLoveMeter();
+            initFallingHearts();
+            initSecretHearts();
+            initLetter();
+            initProposalPage();
+            navigateToPage(1);
+        });
+
+        // ===== PAGE NAVIGATION =====
+        function initPageNavigation() {
+            document.getElementById('nextBtn').addEventListener('click', nextPage);
+            document.getElementById('prevBtn').addEventListener('click', prevPage);
+            
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const pageNum = parseInt(this.getAttribute('data-page'));
+                    navigateToPage(pageNum);
+                });
+            });
+            
+            // Start Journey button - unmutes music
+            document.getElementById('startJourneyBtn').addEventListener('click', function() {
+                startMusicOnFirstInteraction();
+                navigateToPage(2);
+            });
+            
+            document.getElementById('restartBtn').addEventListener('click', function() {
+                navigateToPage(1);
+                resetLoveMeter();
+                maybeClickCount = 0;
+                const maybeBtn = document.getElementById('maybeBtn');
+                if (maybeBtn) {
+                    maybeBtn.style.display = 'flex';
+                    maybeBtn.style.position = 'relative';
+                }
+            });
+            // ✅ HOME BUTTON
+document.getElementById('homeBtn').addEventListener('click', function() {
+    // Change '../index.html' to your actual home page path
+    window.location.href = '../index.html';
+});
+
+        }
+function nextPage() {
+    // Start music on first Next click
+    startMusicOnFirstInteraction();
+    
+    if (currentPage < 5) {
+        navigateToPage(currentPage + 1);
+    }
+}
+
+
+      function prevPage() {
+    // Start music on first Previous click
+    startMusicOnFirstInteraction();
+    
+    if (currentPage > 1) {
+        navigateToPage(currentPage - 1);
+    }
+}
+
+function navigateToPage(pageNum) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+    document.getElementById(`page${pageNum}`).classList.add("active");
+
+    // Update active dot
+    document.querySelectorAll(".nav-dot").forEach(dot => {
+        dot.classList.remove("active");
+        if (parseInt(dot.getAttribute("data-page")) === pageNum) {
+            dot.classList.add("active");
+        }
+    });
+
+    document.getElementById("currentPage").textContent = pageNum;
+    document.getElementById("prevBtn").disabled = (pageNum === 1);
+    document.getElementById("nextBtn").disabled = (pageNum === 5);
+    updateLoveMeter(pageNum);
+    currentPage = pageNum;
+    
+    // ✅ SCROLL TO TOP
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+
+
+        // ===== LOVE METER =====
+        function initLoveMeter() {
+            updateLoveMeter(1);
+        }
+
+        function updateLoveMeter(pageNum) {
+            const progress = (pageNum - 1) * 25;
+            loveProgress = progress;
+            
+            const meterFill = document.getElementById('meterFill');
+            const meterText = document.getElementById('meterText');
+            
+            meterFill.style.width = `${progress}%`;
+            
+            const texts = [
+                "Starting our journey...",
+                "Getting to know you better...",
+                "Sharing my feelings...",
+                "The sweet question...",
+                "Journey complete! 💋"
+            ];
+            
+            meterText.textContent = texts[pageNum - 1] || "";
+        }
+
+        function resetLoveMeter() {
+            loveProgress = 0;
+            document.getElementById('meterFill').style.width = "0%";
+            document.getElementById('meterText').textContent = "Starting our journey...";
+        }
+
+        // ===== FALLING HEARTS =====
+        function initFallingHearts() {
+            const container = document.querySelector('.falling-hearts-container');
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('falling-heart');
+                heart.innerHTML = '❤️';
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                const size = Math.random() * 25 + 15;
+                heart.style.fontSize = size + 'px';
+                
+                const colors = ['#ff4081', '#ff80ab', '#ff66b2', '#ff99cc'];
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode === container) {
+                        container.removeChild(heart);
+                    }
+                }, (duration + delay) * 1000);
+            }
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createHeart(), i * 300);
+            }
+            
+            setInterval(createHeart, 1000);
+        }
+
+        // ===== SECRET HEARTS =====
+        function initSecretHearts() {
+            const secretHearts = document.querySelectorAll('.secret-heart');
+            const secretReveal = document.getElementById('secretReveal');
+            
+            secretHearts.forEach(heart => {
+                heart.addEventListener('mouseenter', function() {
+                    const message = this.getAttribute('data-message');
+                    secretReveal.textContent = message;
+                });
+                
+                heart.addEventListener('mouseleave', function() {
+                    setTimeout(() => {
+                        secretReveal.textContent = '';
+                    }, 500);
+                });
+            });
+        }
+
+        // ===== LETTER =====
+        function initLetter() {
+            const envelope = document.getElementById('mainEnvelope');
+            const letter = document.getElementById('loveLetter');
+            const closeLetter = document.getElementById('closeLetter');
+            const letterOverlay = document.createElement('div');
+            
+            letterOverlay.classList.add('letter-overlay');
+            document.body.appendChild(letterOverlay);
+            
+            envelope.addEventListener('click', function() {
+                letter.classList.add('active');
+                letterOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                const flap = this.querySelector('.envelope-flap');
+                flap.style.transform = 'rotateX(180deg)';
+                
+                loveProgress += 5;
+                document.getElementById('meterFill').style.width = `${Math.min(loveProgress, 100)}%`;
+            });
+            
+            closeLetter.addEventListener('click', closeLetterFunc);
+            letterOverlay.addEventListener('click', closeLetterFunc);
+            
+            function closeLetterFunc() {
+                letter.classList.remove('active');
+                letterOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                const flap = envelope.querySelector('.envelope-flap');
+                flap.style.transform = 'rotateX(0)';
+            }
+        }
+
+        // ===== PROPOSAL PAGE (Friends removed, Maybe button escapes) =====
+        function initProposalPage() {
+            const yesBtn = document.getElementById('yesBtn');
+            const maybeBtn = document.getElementById('maybeBtn');
+            
+            // YES button - shows reaction and goes to next page
+            yesBtn.addEventListener('click', function() {
+                showResponse('happyReaction');
+                createFireworks();
+                
+                loveProgress = 100;
+                document.getElementById('meterFill').style.width = '100%';
+                document.getElementById('meterText').textContent = 'She said YES! 🎉';
+                
+                setTimeout(() => {
+                    navigateToPage(5);
+                }, 2500);
+            });
+            
+            // MAYBE button - escapes from cursor/touch
+            let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Mobile - escape on touch
+                maybeBtn.addEventListener('touchstart', handleMaybeEscape);
+            } else {
+                // Desktop - escape on hover
+                maybeBtn.addEventListener('mouseenter', handleMaybeEscape);
+            }
+        }
+
+        function handleMaybeEscape(e) {
+            e.preventDefault();
+            const maybeBtn = document.getElementById('maybeBtn');
+            maybeClickCount++;
+            
+            // Create poof effect
+            createPoofEffect(maybeBtn);
+            
+            if (maybeClickCount >= maxMaybeClicks) {
+                // Disappear after 5 escapes
+                maybeBtn.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                maybeBtn.style.opacity = '0';
+                maybeBtn.style.transform = 'scale(0)';
+                
+                setTimeout(() => {
+                    maybeBtn.style.display = 'none';
+                }, 500);
+            } else {
+                // Move to random position
+                const container = document.getElementById('responseButtons');
+                const containerRect = container.getBoundingClientRect();
+                
+                const maxX = containerRect.width - maybeBtn.offsetWidth;
+                const maxY = containerRect.height - maybeBtn.offsetHeight;
+                
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY * 0.5;
+                
+                maybeBtn.style.position = 'absolute';
+                maybeBtn.style.left = randomX + 'px';
+                maybeBtn.style.top = randomY + 'px';
+                maybeBtn.style.transition = 'all 0.3s ease';
+            }
+        }
+
+        function createPoofEffect(element) {
+            const poof = document.createElement('div');
+            poof.className = 'poof';
+            poof.innerHTML = '💨';
+            poof.style.position = 'absolute';
+            poof.style.left = element.offsetLeft + element.offsetWidth / 2 + 'px';
+            poof.style.top = element.offsetTop + element.offsetHeight / 2 + 'px';
+            poof.style.fontSize = '2rem';
+            poof.style.zIndex = '1000';
+            
+            element.parentElement.appendChild(poof);
+            
+            setTimeout(() => {
+                poof.remove();
+            }, 500);
+        }
+
+        function showResponse(responseId) {
+            document.querySelectorAll('.reaction').forEach(reaction => {
+                reaction.classList.remove('active');
+            });
+            
+            const responseElement = document.getElementById(responseId);
+            responseElement.classList.add('active');
+            
+            setTimeout(() => {
+                document.querySelector('.response-buttons').style.opacity = '0.5';
+                document.querySelector('.response-buttons').style.pointerEvents = 'none';
+            }, 300);
+        }
+
+        // ===== FIREWORKS =====
+        function createFireworks() {
+            const canvas = document.getElementById('fireworks');
+            if (!canvas) return;
+            canvas.style.display = 'block';
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const colors = ['#ff6b8b', '#ff8e53', '#ffd700', '#ff1493', '#00ffff'];
+            
+            for (let i = 0; i < 10; i++) {
+                const centerX = Math.random() * canvas.width;
+                const centerY = Math.random() * canvas.height;
+                
+                for (let j = 0; j < 50; j++) {
+                    particles.push({
+                        x: centerX, y: centerY,
+                        vx: (Math.random() - 0.5) * 12,
+                        vy: (Math.random() - 0.5) * 12,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        size: Math.random() * 4 + 2,
+                        alpha: 1, life: 1
+                    });
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach((p, index) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.05;
+                    p.life -= 0.01;
+                    p.alpha = p.life;
+                    
+                    if (p.life <= 0) {
+                        particles.splice(index, 1);
+                        return;
+                    }
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + Math.floor(p.alpha * 255).toString(16).padStart(2, '0');
+                    ctx.fill();
+                });
+                
+                if (particles.length > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    canvas.style.display = 'none';
+                }
+            }
+            
+            animate();
+        }
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('fireworks');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+</body>
+</html>

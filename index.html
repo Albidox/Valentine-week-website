@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Week 2025 💝 | Celebration of Love</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #6c5b7b 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Music Toggle */
+        .music-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 107, 157, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: #ffe6f0;
+        }
+
+        .music-toggle span {
+            font-size: 1.8rem;
+            animation: musicPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Background Hearts */
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.2;
+            animation: floatUp 15s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #fff;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 15px;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+            }
+            50% {
+                text-shadow: 3px 3px 25px rgba(255, 107, 157, 0.8);
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .date-range {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 300;
+        }
+
+        /* Welcome GIF */
+        .welcome-gif-container {
+            text-align: center;
+            margin: 40px 0;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .welcome-gif {
+            max-width: 400px;
+            width: 90%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Days Grid */
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Day Card */
+        .day-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            animation: cardSlideUp 0.8s ease-out backwards;
+        }
+
+        .day-card:nth-child(1) { animation-delay: 0.1s; }
+        .day-card:nth-child(2) { animation-delay: 0.2s; }
+        .day-card:nth-child(3) { animation-delay: 0.3s; }
+        .day-card:nth-child(4) { animation-delay: 0.4s; }
+        .day-card:nth-child(5) { animation-delay: 0.5s; }
+        .day-card:nth-child(6) { animation-delay: 0.6s; }
+        .day-card:nth-child(7) { animation-delay: 0.7s; }
+        .day-card:nth-child(8) { animation-delay: 0.8s; }
+        .day-card:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes cardSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .day-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .day-card:hover::before {
+            left: 100%;
+        }
+
+        .day-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 107, 157, 0.5);
+        }
+
+        .day-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b9d, #c06c84);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        .day-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .day-card:hover .day-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+   .day-gif-container {
+    width: 100%;
+    height: 250px;  /* ✅ INCREASED TO 250px - MORE SPACIOUS */
+    margin-bottom: 25px;  /* ✅ More spacing below */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.day-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* ✅ CHANGED FROM cover TO contain - NO CROPPING */
+    background: linear-gradient(135deg, #fff0f5, #ffe6f0);  /* ✅ ADDED BACKGROUND */
+}
+
+
+        .day-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #ff6b9d;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .day-date {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .day-description {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .day-btn {
+            background: linear-gradient(135deg, #ff6b9d, #c06c84);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .day-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer-gif-container {
+            margin: 30px 0;
+        }
+
+        .footer-gif {
+            max-width: 300px;
+            width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-text {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-hearts {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        /* Responsive */
+      @media (max-width: 768px) {
+    .container {
+        padding: 30px 15px;
+    }
+ .day-gif-container {
+        height: 220px;  /* ✅ INCREASED FROM 180px */
+    }
+    .days-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .day-card {
+        padding: 25px;
+    }
+    
+    /* ✅ ADDED FOR TABLET GIF BOXES */
+    .day-gif-container {
+        height: 180px;
+    }
+
+    .music-toggle {
+        width: 50px;
+        height: 50px;
+        top: 15px;
+        right: 15px;
+    }
+
+    .music-toggle span {
+        font-size: 1.5rem;
+    }
+
+    .welcome-gif {
+        max-width: 300px;
+    }
+}
+
+
+     @media (max-width: 480px) {
+    .header {
+        margin-bottom: 30px;
+    }
+.day-gif-container {
+        height: 200px;  /* ✅ INCREASED FROM 180px */
+    }
+    .day-card {
+        padding: 20px;
+    }
+
+    .day-icon {
+        font-size: 3rem;
+    }
+
+    .day-title {
+        font-size: 1.7rem;
+    }
+
+    .day-gif-container {
+        height: 180px;  /* ✅ INCREASED FROM 120px TO 180px */
+    }
+}
+
+
+        /* Welcome Screen Overlay */
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.98) 0%, rgba(192, 108, 132, 0.98) 50%, rgba(108, 91, 123, 0.98) 100%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+    backdrop-filter: blur(10px);
+}
+
+.welcome-screen.hidden {
+    animation: fadeOut 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+.welcome-content {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+    animation: scaleIn 0.8s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.welcome-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.4);
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.05); }
+    20% { transform: scale(0.95); }
+}
+
+.welcome-subtitle {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-description {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.enter-btn {
+    background: linear-gradient(135deg, #fff 0%, #ffe6f0 100%);
+    color: #ff6b9d;
+    border: none;
+    padding: 18px 50px;
+    border-radius: 50px;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: bounce 2s ease-in-out infinite;
+    font-family: 'Poppins', sans-serif;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.enter-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #ffe6f0 0%, #fff 100%);
+}
+
+.enter-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.music-note-animation {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: musicFloat 2s ease-in-out infinite;
+}
+
+@keyframes musicFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-content">
+        <div class="music-note-animation">🎵</div>
+        <h1 class="welcome-title">Valentine Week 2026</h1>
+        <p class="welcome-subtitle">💝 A Week of Love & Romance 💝</p>
+        <p class="welcome-description">
+            Experience the magic of love with music and beautiful animations.<br>
+            Click below to enter and start your romantic journey!
+        </p>
+        <button class="enter-btn" id="enterBtn" onclick="enterSite()">
+            ❤️ Enter with Music ❤️
+        </button>
+    </div>
+</div>
+
+    <!-- Music Toggle -->
+    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+        <span id="musicIcon">🎵</span>
+    </div>
+
+    <!-- 
+    ==========================================
+    🎵 MUSIC SLOT - ADD YOUR MUSIC FILE HERE
+    ==========================================
+    INSTRUCTIONS:
+    Replace "YOUR_MUSIC_FILE.mp3" with your romantic music filename
+    This music will AUTOPLAY (UNMUTED) when the page loads!
+    RECOMMENDED: Romantic, love song, Valentine's theme
+    -->
+   <audio id="backgroundMusic" loop preload="auto">
+    <source src="./gif/Meri Zindagi Hai Tu.mp3" type="audio/mpeg">
+</audio>
+
+    <!-- Background Hearts -->
+    <div class="hearts-background" id="heartsBackground"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">Valentine Week 2026 💝</h1>
+            <p class="subtitle">A Week of Love & Romance</p>
+            <p class="date-range">February 7 - 14, 2026</p>
+        </header>
+
+        <!-- Welcome GIF -->
+        <!-- 
+        🖼️ GIF SLOT 1 - WELCOME/LOVE GIF
+        EMOTION: Romantic, welcoming, love celebration, hearts
+        EXAMPLES: Animated hearts, romantic couple, love celebration, "Welcome to Valentine Week"
+        RECOMMENDED: Heart animation, romantic celebration, love theme
+        LOCATION: Main welcome section at the top
+        -->
+        <div class="welcome-gif-container">
+            <img src="./gif/heart.gif" alt="Welcome to Valentine Week" class="welcome-gif">
+        </div>
+
+        <!-- Days Grid -->
+        <div class="days-grid">
+            
+            <!-- Day 1: Rose Day -->
+            <div class="day-card" onclick="goToDay('rose')">
+                <div class="day-number">1</div>
+                <span class="day-icon">🌹</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 2 - ROSE DAY GIF
+                EMOTION: Romantic, roses, giving flowers, love blooming
+                EXAMPLES: Rose animation, giving roses, rose petals falling, red roses
+                RECOMMENDED: Animated roses, rose bouquet, romantic roses
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/bubu-dudu-intro.gif" alt="Rose Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Rose Day</h2>
+                <p class="day-date">February 7, 2026</p>
+                <p class="day-description">
+                    Express your feelings with the beauty of roses 🌹
+                </p>
+                <button class="day-btn" onclick="goToDay('rose')">
+                    Celebrate Rose Day →
+                </button>
+            </div>
+
+            <!-- Day 2: Propose Day -->
+            <div class="day-card" onclick="goToDay('propose')">
+                <div class="day-number">2</div>
+                <span class="day-icon">💍</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 3 - PROPOSE DAY GIF
+                EMOTION: Proposal, romantic moment, ring, saying yes
+                EXAMPLES: Proposal scene, ring box opening, "Will you?", romantic proposal
+                RECOMMENDED: Proposal animation, ring, romantic gesture
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/bubu-dudu-heart.gif" alt="Propose Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Propose Day</h2>
+                <p class="day-date">February 8, 2026</p>
+                <p class="day-description">
+                    The perfect day to pop the question 💍
+                </p>
+                <button class="day-btn" onclick="goToDay('propose')">
+                    Celebrate Propose Day →
+                </button>
+            </div>
+
+            <!-- Day 3: Chocolate Day -->
+            <div class="day-card" onclick="goToDay('chocolate')">
+                <div class="day-number">3</div>
+                <span class="day-icon">🍫</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 4 - CHOCOLATE DAY GIF
+                EMOTION: Sweet, delicious, chocolate love, treats
+                EXAMPLES: Chocolate hearts, chocolate box, chocolate fountain, sweet treats
+                RECOMMENDED: Chocolate animation, chocolate hearts, sweet chocolates
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/choco2.gif" alt="Chocolate Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Chocolate Day</h2>
+                <p class="day-date">February 9, 2026</p>
+                <p class="day-description">
+                    Sweeten your love with chocolates 🍫
+                </p>
+                <button class="day-btn" onclick="goToDay('chocolate')">
+                    Celebrate Chocolate Day →
+                </button>
+            </div>
+
+            <!-- Day 4: Teddy Day -->
+            <div class="day-card" onclick="goToDay('teddy')">
+                <div class="day-number">4</div>
+                <span class="day-icon">🧸</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 5 - TEDDY DAY GIF
+                EMOTION: Cute, cuddly, teddy bears, hugging
+                EXAMPLES: Teddy bear hugging, cute bears, teddy with heart, bear love
+                RECOMMENDED: Animated teddy bear, cute bear hug, teddy with hearts
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/roseteady.gif" alt="Teddy Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Teddy Day</h2>
+                <p class="day-date">February 10, 2026</p>
+                <p class="day-description">
+                    Gift a cuddly companion to your love 🧸
+                </p>
+                <button class="day-btn" onclick="goToDay('teddy')">
+                    Celebrate Teddy Day →
+                </button>
+            </div>
+
+            <!-- Day 5: Promise Day -->
+            <div class="day-card" onclick="goToDay('promise')">
+                <div class="day-number">5</div>
+                <span class="day-icon">🤝</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 6 - PROMISE DAY GIF
+                EMOTION: Promise, commitment, pinky promise, trust
+                EXAMPLES: Pinky promise, holding hands, promise gesture, commitment
+                RECOMMENDED: Pinky promise animation, hands together, promise symbol
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/promise1.gif" alt="Promise Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Promise Day</h2>
+                <p class="day-date">February 11, 2026</p>
+                <p class="day-description">
+                    Make promises to cherish forever 🤝
+                </p>
+                <button class="day-btn" onclick="goToDay('promise')">
+                    Celebrate Promise Day →
+                </button>
+            </div>
+
+            <!-- Day 6: Hug Day -->
+            <div class="day-card" onclick="goToDay('hug')">
+                <div class="day-number">6</div>
+                <span class="day-icon">🤗</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 7 - HUG DAY GIF
+                EMOTION: Warm hug, embrace, comfort, affection
+                EXAMPLES: Hugging couples, warm embrace, group hug, loving hug
+                RECOMMENDED: Animated hug, couple embracing, warm hug scene
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/bubu-dudu-hug 6.gif" alt="Hug Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Hug Day</h2>
+                <p class="day-date">February 12, 2026</p>
+                <p class="day-description">
+                    Embrace your loved ones warmly 🤗
+                </p>
+                <button class="day-btn" onclick="goToDay('hug')">
+                    Celebrate Hug Day →
+                </button>
+            </div>
+
+            <!-- Day 7: Kiss Day -->
+            <div class="day-card" onclick="goToDay('kiss')">
+                <div class="day-number">7</div>
+                <span class="day-icon">💋</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 8 - KISS DAY GIF
+                EMOTION: Kiss, romantic kiss, affection, love
+                EXAMPLES: Kissing couples, kiss mark, romantic kiss, love kiss
+                RECOMMENDED: Animated kiss, romantic kiss scene, kiss hearts
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/bubu-dudu-love.gif" alt="Kiss Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Kiss Day</h2>
+                <p class="day-date">February 13, 2026</p>
+                <p class="day-description">
+                    Seal your love with a kiss 💋
+                </p>
+                <button class="day-btn" onclick="goToDay('kiss')">
+                    Celebrate Kiss Day →
+                </button>
+            </div>
+
+            <!-- Day 8: Valentine's Day -->
+            <div class="day-card" onclick="goToDay('valentine')">
+                <div class="day-number">8</div>
+                <span class="day-icon">❤️</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 9 - VALENTINE'S DAY GIF
+                EMOTION: Grand love, Valentine celebration, hearts everywhere, ultimate romance
+                EXAMPLES: Heart explosion, "Happy Valentine's", love celebration, romantic fireworks
+                RECOMMENDED: Heart animation, Valentine celebration, grand romantic gesture
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/dudu-giving-flowers-bubu-flowers.gif" alt="Valentine's Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Valentine's Day</h2>
+                <p class="day-date">February 14, 2026</p>
+                <p class="day-description">
+                    The ultimate celebration of love ❤️
+                </p>
+                <button class="day-btn" onclick="goToDay('valentine')">
+                    Celebrate Valentine's Day →
+                </button>
+            </div>
+
+            <!-- Day 9: Sorry Day (Bonus) -->
+            <div class="day-card" onclick="goToDay('sorry')">
+                <div class="day-number">💔</div>
+                <span class="day-icon">🙏</span>
+                
+                <!-- 
+                🖼️ GIF SLOT 10 - SORRY DAY GIF
+                EMOTION: Apology, sorry, forgiveness, making amends
+                EXAMPLES: Apologetic gesture, sad but hopeful, asking forgiveness, sorry card
+                RECOMMENDED: Sorry animation, apologetic gesture, heart healing
+                -->
+                <div class="day-gif-container">
+                    <img src="./gif/forgive-me-bubu-bubu-angry.gif" alt="Sorry Day" class="day-gif">
+                </div>
+                
+                <h2 class="day-title">Sorry Day</h2>
+                <p class="day-date">When You Need It</p>
+                <p class="day-description">
+                    Make amends and seek forgiveness 🙏
+                </p>
+                <button class="day-btn" onclick="goToDay('sorry')">
+                    Say You're Sorry →
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- 
+            🖼️ GIF SLOT 11 - FOOTER/ENDING GIF
+            EMOTION: Love, happiness, together forever, romantic ending
+            EXAMPLES: Couple together, "Love you", heart finale, romantic sunset
+            RECOMMENDED: Romantic couple, love forever, happy together
+            -->
+            <div class="footer-gif-container">
+                <img src="./gif/bubududu-panda.gif" alt="Love Forever" class="footer-gif">
+            </div>
+            
+            <p class="footer-text">
+                Every day of Valentine Week is special.<br>
+                Celebrate love, romance, and togetherness! 💝
+            </p>
+            <div class="footer-hearts">
+                💕 💖 💗 💓 💝 💞 💘
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.8;">
+                Made with love for you ❤️
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+    // ===== PAGE LINKS CONFIGURATION =====
+    const pageLinks = {
+        rose: './Rose day/index.html',
+        propose: './Propose day/index.html',
+        chocolate: './Chocolate day/index.html',
+        teddy: './Teddy day/index.html',
+        promise: './Promise day/index.html',
+        hug: './Hug day/index.html',
+        kiss: './Kiss Day/index.html',
+        valentine: './Valentine day/index.html',
+        sorry: './Sorry day/index.html'
+    };
+
+    // ===== MUSIC CONTROL =====
+    const music = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    let isMusicPlaying = false;
+
+    // ===== WELCOME SCREEN & MUSIC START =====
+function enterSite() {
+    // Start music with user interaction
+    music.volume = 0.6;
+    music.muted = false;
+    
+    // Skip the 3-second intro silence
+    music.currentTime = 3; // Adjust this number if needed (in seconds)
+    
+    music.play().then(() => {
+        console.log('🎵 Music started successfully!');
+        isMusicPlaying = true;
+        musicIcon.textContent = '🎵';
+        
+        // Hide welcome screen with animation
+        welcomeScreen.classList.add('hidden');
+        
+        // Remove welcome screen from DOM after animation
+        setTimeout(() => {
+            welcomeScreen.style.display = 'none';
+        }, 800);
+        
+    }).catch(error => {
+        console.error('Failed to play music:', error);
+        // Still hide welcome screen even if music fails
+        welcomeScreen.classList.add('hidden');
+        setTimeout(() => {
+            welcomeScreen.style.display = 'none';
+        }, 800);
+    });
+}
+
+
+    // ===== MUSIC TOGGLE =====
+    function toggleMusic() {
+        if (music.paused || music.muted) {
+            music.muted = false;
+            music.play();
+            isMusicPlaying = true;
+            musicIcon.textContent = '🎵';
+        } else {
+            music.pause();
+            isMusicPlaying = false;
+            musicIcon.textContent = '🔇';
+        }
+    }
+
+    // ===== NAVIGATION =====
+    function goToDay(day) {
+        const link = pageLinks[day];
+        if (link) {
+            window.location.href = link;
+        } else {
+            alert(`Please add the ${day.charAt(0).toUpperCase() + day.slice(1)} Day page link!`);
+        }
+    }
+
+    // ===== FLOATING HEARTS =====
+    function createFloatingHearts() {
+        const container = document.getElementById('heartsBackground');
+        const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💞', '💘'];
+        
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 15 + 's';
+            heart.style.animationDuration = (10 + Math.random() * 10) + 's';
+            heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+            container.appendChild(heart);
+        }
+    }
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+        createFloatingHearts();
+        console.log('💝 Valentine Week Landing Page Loaded!');
+        console.log('🎵 Click "Enter with Music" to start the experience!');
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>✨ Happy Hug Day – Bubu & Dudu ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fff9fb, #ffeef5);
+            animation: bgShift 20s ease infinite;
+            background-size: 400% 400%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ========================================
+           CANVAS (light particles)
+           ======================================== */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* ========================================
+           PAGE CONTAINER
+           ======================================== */
+        .pages-container {
+            position: relative;
+            z-index: 20;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ========================================
+           PAGES – SMOOTH FADE
+           ======================================== */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: scale(0.98) translateY(8px);
+            transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+                        transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            min-height: 85vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            border-radius: 56px;
+            background: rgba(255, 250, 245, 0.7);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 20px 40px rgba(255, 160, 200, 0.2);
+            margin: 12px 0;
+            border: 2px solid #fff0f5;
+        }
+
+        .page.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .page-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.8rem;
+            position: relative;
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+        .title-large {
+            font-size: clamp(2.4rem, 8vw, 4rem);
+            font-weight: 700;
+            color: #ff8cae;
+            text-shadow: 5px 5px 0 #ffe2ed, 8px 8px 20px rgba(255, 140, 170, 0.3);
+            letter-spacing: 2px;
+            text-align: center;
+            animation: pulse 3s infinite;
+        }
+
+        .heading {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 600;
+            color: #b47c9e;
+            background: linear-gradient(145deg, #ffe8f0, #fff4fa);
+            padding: 0.6rem 2rem;
+            border-radius: 100px;
+            box-shadow: 0 8px 0 #e6b4cc, 0 12px 28px #ffcfd5;
+            border: 3px dashed #ffb3c6;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* ========================================
+           GIF STYLES
+           ======================================== */
+        .gif-glow {
+            background: white;
+            border-radius: 50%;
+            padding: 14px;
+            display: inline-block;
+            box-shadow: 0 16px 28px #ffb6c1, 0 0 0 6px #ffe2f0;
+            margin: 8px;
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .gif-glow:hover {
+            transform: scale(1.03);
+        }
+
+        .hero-gif, .cloud-gif, .big-hug-gif {
+            width: 210px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 45% 55% 48% 52% / 58% 45% 55% 42%;
+            border: 8px solid white;
+            box-shadow: 0 12px 22px rgba(255, 130, 160, 0.3);
+            display: block;
+        }
+
+        .photo-frame img {
+            width: 180px;
+            height: 160px;
+            border-radius: 28px 28px 16px 16px;
+            border: 6px solid white;
+            object-fit: cover;
+        }
+
+        .big-hug-gif {
+            width: 260px;
+            height: 260px;
+            border-radius: 50px 30px 70px 20px;
+            border: 12px solid #ffeaf0;
+            transform: rotate(1deg);
+        }
+
+        .gif-hero {
+            position: relative;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            animation: floatSoft 3s infinite;
+        }
+
+        /* ========================================
+           POLAROID GRID
+           ======================================== */
+        .polaroid-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .polaroid-card {
+            background: white;
+            padding: 0.9rem 0.9rem 1.5rem;
+            border-radius: 28px 28px 20px 20px;
+            box-shadow: 0 12px 0 #fbc1cb, 0 22px 32px #ffccd5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 4px solid #fff5fc;
+            max-width: 230px;
+            will-change: transform;
+            cursor: pointer;
+        }
+
+        .polaroid-card:hover {
+            transform: translateY(-12px) rotate(0.8deg);
+            box-shadow: 0 16px 0 #faaab7, 0 28px 38px #ffa5b0;
+        }
+
+        .caption {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ae6f84;
+            background: #fff3f9;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+        }
+
+        /* ========================================
+           HUG MESSAGE BOX
+           ======================================== */
+        .hug-message-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0.5rem auto 1rem;
+            padding: 0 1rem;
+        }
+
+        .hug-message-box {
+            background: #fff9f0;
+            border: 4px solid white;
+            border-radius: 50px 50px 50px 20px;
+            padding: 1.4rem 2rem;
+            font-size: 1.4rem;
+            color: #8b5a6b;
+            text-align: center;
+            box-shadow: 0 12px 0 #fec5bb, 0 18px 28px #ffd9ce;
+            backdrop-filter: blur(4px);
+            border-bottom: 8px solid #ffe0d4;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+            line-height: 1.5;
+            transition: all 0.2s;
+        }
+
+        /* ========================================
+           BUTTONS (base)
+           ======================================== */
+        .btn {
+            border: 5px solid white;
+            padding: 0.8rem 2rem;
+            font-size: 1.5rem;
+            border-radius: 70px;
+            font-weight: 600;
+            background: #ffe0f0;
+            color: #9f697c;
+            box-shadow: 0 10px 0 #f6bac9, 0 12px 20px #ffc1ce;
+            transition: transform 0.06s, box-shadow 0.1s;
+            cursor: pointer;
+            border-bottom-width: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            will-change: transform;
+        }
+
+        .btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 4px 0 #f6bac9, 0 12px 20px #ffc1ce;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ========================================
+           YES & NO BUTTONS (Page 4)
+           ======================================== */
+        .yes-btn {
+            background: #ffa7b9;
+            color: white;
+            border-bottom: 12px solid #c06a7a;
+            font-size: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 0 #c06a7a, 0 0 20px rgba(255, 120, 160, 0.6);
+        }
+        .no-btn {
+            background: #d9c2b0;
+            color: #5e4b3c;
+            border-bottom: 12px solid #a28d7a;
+        }
+        /* NO button – no hover movement */
+        .no-btn:hover {
+            transform: none;
+            box-shadow: 0 10px 0 #a28d7a, 0 12px 20px #d9c2b0;
+        }
+
+        /* YES button glow effect (enhanced with levels) */
+        .yes-btn-glow {
+            box-shadow: 0 10px 0 #c06a7a, 0 0 30px #ff8cae, 0 0 60px #ffb3c6;
+        }
+
+        /* ========================================
+           FEEDBACK AREA (Page 4)
+           ======================================== */
+        .feedback-area {
+            background: #fff9f0;
+            border: 4px dashed #ffb3c6;
+            border-radius: 60px 60px 60px 20px;
+            padding: 1.2rem 2rem;
+            font-size: 1.6rem;
+            color: #9b6b7c;
+            text-align: center;
+            min-height: 100px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 12px 0 #fec5bb, 0 18px 28px #ffd9ce;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+        }
+        .question-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        .question-text {
+            font-size: 2rem;
+            color: #a86f82;
+            background: rgba(255, 230, 240, 0.7);
+            padding: 0.8rem 2rem;
+            border-radius: 100px;
+            border: 3px solid white;
+        }
+        .yes-no-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========================================
+           MUSIC TOGGLE BUTTON (floating)
+           ======================================== */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #ffe5f0;
+            border: 5px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 8px 0 #e6b4cc, 0 12px 28px #ffc1ce;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .music-toggle:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #e6b4cc, 0 12px 28px #ffc1ce;
+        }
+
+        /* ========================================
+           HUG COUNTER
+           ======================================== */
+        .hug-counter {
+            background: #ffe9f0;
+            padding: 1.5rem 2.8rem;
+            border-radius: 100px 100px 50px 50px;
+            border: 5px solid white;
+            box-shadow: inset 0 -3px 0 #ffc2cf, 0 20px 28px #ffd0da;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .counter-box {
+            font-size: 2rem;
+            background: white;
+            padding: 0.2rem 1.8rem;
+            border-radius: 70px;
+            color: #c95f73;
+            font-weight: 700;
+            box-shadow: 0 5px 0 #dba1ae;
+        }
+        .btn-hug {
+            background: #ffa7b9;
+            color: white;
+            border-bottom: 12px solid #c06a7a;
+            font-size: 1.9rem;
+            padding: 0.9rem 2.2rem;
+        }
+        .btn-startover {
+            background: #ffe6c1;
+            color: #9b7b6b;
+        }
+
+        /* ========================================
+           PLUS-ONE ANIMATION
+           ======================================== */
+        .plus-one {
+            position: fixed;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ff6b8b;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatUp 1s ease-out forwards;
+            text-shadow: 0 0 10px #ffb3c6;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
+            100% { opacity: 0; transform: translate(-50%, -130%) scale(1.4); }
+        }
+
+        /* ========================================
+           DECORATIONS
+           ======================================== */
+        .cloud-left, .cloud-right, .star-top, .star-bottom,
+        .lights, .heart-float, .emoji-float {
+            position: absolute;
+            font-size: 2.6rem;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatSoft 8s infinite;
+            will-change: transform;
+        }
+        .cloud-left { top: 2%; left: 0%; font-size: 3.5rem; }
+        .cloud-right { bottom: 4%; right: 0%; font-size: 4rem; animation-delay: 1.2s; }
+        .star-top { top: 10%; right: 5%; font-size: 2.5rem; animation: twinkle 2.5s infinite; }
+        .star-bottom { bottom: 8%; left: 3%; font-size: 2.8rem; }
+        .lights { bottom: 1%; left: 5%; font-size: 1.8rem; letter-spacing: 10px; }
+        .heart-float { top: 3%; right: 3%; font-size: 2rem; }
+        .emoji-float { bottom: 2%; right: 6%; font-size: 2rem; }
+
+        @keyframes floatSoft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ========================================
+           BENEFITS CLOUD
+           ======================================== */
+        .benefits-cloud {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+        }
+        .cloud-bubble {
+            position: relative;
+            background: #fff0f5;
+            border-radius: 60% 40% 70% 30% / 50% 55% 45% 50%;
+            padding: 1.8rem;
+            box-shadow: 0 14px 0 #fec5d2, 0 24px 38px #fec5d9;
+            border: 5px dashed #ffe2f0;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bubble-tail {
+            position: absolute;
+            bottom: -25px;
+            left: 30%;
+            width: 60px;
+            height: 60px;
+            background: #fff0f5;
+            border-radius: 70% 30% 60% 40% / 50% 60% 40% 50%;
+            box-shadow: 0 10px 0 #fec5d2;
+            transform: rotate(25deg);
+            border: 5px dashed #ffe2f0;
+            z-index: -1;
+        }
+        .benefits-list {
+            list-style: none;
+            background: rgba(255, 255, 245, 0.8);
+            padding: 1.8rem 2.5rem;
+            border-radius: 70px 70px 70px 20px;
+            box-shadow: 0 12px 0 #ebc0cb, 0 24px 32px #ffd1da;
+            backdrop-filter: blur(4px);
+            font-size: 1.5rem;
+            border: 3px solid white;
+        }
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0.9rem 0;
+            color: #725b68;
+        }
+
+        /* ========================================
+           RIBBON
+           ======================================== */
+        .ribbon-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .ribbon {
+            position: absolute;
+            top: -20px;
+            left: -30px;
+            font-size: 3.5rem;
+            transform: rotate(-20deg);
+            filter: drop-shadow(4px 8px 8px rgba(255, 100, 150, 0.3));
+            animation: sway 3.5s infinite;
+        }
+        .ribbon.right {
+            left: auto;
+            right: -30px;
+            top: -15px;
+            transform: rotate(20deg);
+        }
+        @keyframes sway {
+            0%, 100% { transform: rotate(-20deg) scale(1); }
+            50% { transform: rotate(-16deg) scale(1.08); }
+        }
+        .ribbon.right {
+            animation: swayRight 3.5s infinite;
+        }
+        @keyframes swayRight {
+            0%, 100% { transform: rotate(20deg) scale(1); }
+            50% { transform: rotate(16deg) scale(1.08); }
+        }
+
+        /* ========================================
+           MESSAGE BUBBLES
+           ======================================== */
+        .message-bubble {
+            font-size: 1.5rem;
+            background: rgba(255, 240, 245, 0.8);
+            padding: 1.2rem 2rem;
+            border-radius: 60px 60px 60px 20px;
+            color: #7c5e6b;
+            border: 3px solid white;
+            box-shadow: 0 10px 0 #ffd9e5, 0 16px 28px #ffe2e9;
+            text-align: center;
+        }
+        .message-special {
+            font-size: 1.9rem;
+            background: #fff2d7;
+            padding: 1rem 2rem;
+            border-radius: 200px 200px 200px 20px;
+            color: #aa7a8a;
+            border: 5px double #ffa7b9;
+            box-shadow: 0 10px 0 #ffb9cb;
+        }
+
+        /* ========================================
+           CELEBRATION OVERLAY – FLOATING CONFETTI
+           ======================================== */
+        .celebration-particle {
+            position: fixed;
+            font-size: 2.2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: floatCelebration 2s ease-out forwards;
+            text-shadow: 0 0 12px rgba(255, 200, 220, 0.8);
+            will-change: transform, opacity;
+        }
+
+        @keyframes floatCelebration {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            70% {
+                opacity: 0.9;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--driftX, 200px), var(--driftY, -300px)) rotate(240deg);
+            }
+        }
+
+        .celebration-particle.special {
+            filter: drop-shadow(0 0 6px gold);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 700px) {
+            .page { padding: 1.5rem 1rem; }
+            .title-large { font-size: 2.2rem; }
+            .heading { font-size: 1.8rem; padding: 0.5rem 1.5rem; }
+            .polaroid-card { max-width: 100%; width: 260px; }
+            .hero-gif, .cloud-gif { width: 180px; height: 180px; }
+            .big-hug-gif { width: 220px; height: 220px; }
+            .btn { font-size: 1.3rem; padding: 0.6rem 1.4rem; }
+            .btn-hug { font-size: 1.6rem; }
+            .counter-box { font-size: 1.7rem; }
+            .benefits-list { font-size: 1.3rem; padding: 1.2rem; }
+            .cloud-bubble { width: 240px; height: 240px; }
+            .hug-message-box { font-size: 1.2rem; padding: 1rem 1.5rem; }
+            .music-toggle { width: 50px; height: 50px; font-size: 1.8rem; bottom: 15px; right: 15px; }
+            .question-text { font-size: 1.6rem; }
+            .yes-btn, .no-btn { font-size: 1.6rem; }
+            .feedback-area { font-size: 1.3rem; }
+        }
+
+        @media (max-width: 480px) {
+            .title-large { font-size: 1.9rem; }
+            .message-bubble { font-size: 1.2rem; }
+            .message-special { font-size: 1.5rem; }
+            .polaroid-grid { gap: 1.2rem; }
+            .btn { font-size: 1.2rem; }
+            .hug-message-box { font-size: 1.1rem; }
+            .question-text { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- ==========================================
+         🎵 MUSIC SLOT - ADD YOUR MUSIC FILE HERE
+         ========================================== -->
+    <!--
+         INSTRUCTIONS:
+         1. Add your music file (MP3 format recommended) to the same folder as this HTML file
+         2. Replace "YOUR_MUSIC_FILE.mp3" below with your actual filename
+         Example: <source src="romantic-music.mp3" type="audio/mpeg">
+    -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="./gif/hug-day-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Floating music toggle button -->
+    <div id="musicToggle" class="music-toggle">🎵</div>
+
+    <div class="pages-container">
+
+        <!-- ==========================================
+             PAGE 1 – HERO HUG / WELCOME
+             ========================================== -->
+        <section class="page active" id="page1">
+            <div class="page-content">
+                <h1 class="title-large">Happy Hug Day!</h1>
+                <div class="gif-hero">
+                    <div class="gif-glow">
+                        <!-- 🖼️ GIF SLOT 1 - Main Hero Hug GIF -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER.gif" with your actual GIF filename
+                             Example: <img src="bubu-dudu-hug.gif" alt="Bubu and Dudu hugging" class="hero-gif">
+                        -->
+                        <img src="./gif/bubu-dudu-hug.gif" alt="Bubu and Dudu hugging" class="hero-gif">
+                    </div>
+                    <span class="floating-emoji">💖 ✨ 💕</span>
+                </div>
+                <p class="message-bubble" id="typingMessage" data-text="Today, we celebrate the warmest, coziest thing in the world… <br>HUGS from Someone Who Admire You! 🤗🧸">Today, we celebrate the warmest, coziest thing in the world… <br>HUGS from Someone Who Admire You! 🤗🧸</p>
+                <button class="btn-next btn">Next → ✨</button>
+                <div class="cloud-left">☁️✨</div>
+                <div class="cloud-right">☁️☁️✨</div>
+                <div class="star-top">🌟</div>
+                <div class="star-bottom">✨⭐</div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 2 – POLAROID MEMORIES
+             ========================================== -->
+        <section class="page" id="page2">
+            <div class="page-content">
+               <h2 class="heading">✨ Our Cozy Hug Moments ✨</h2>
+<!-- ✅ NEW HINT -->
+<p style="font-size: 1.2rem; color: #ff8cae; font-style: italic; margin: 0.5rem 0 1rem 0; animation: pulse 2s infinite;">
+    💡 Try clicking all the hugs to read every sweet message! ✨
+</p>
+<div class="polaroid-grid">
+
+                    <!-- 🖼️ GIF SLOT 2 - Morning Hug -->
+                    <!--
+                         INSTRUCTIONS:
+                         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+                         Example: <img src="morning-hug.gif" alt="Morning hug">
+                    -->
+                    <div class="polaroid-card" data-hug="morning">
+                        <div class="photo-frame">
+                            <img src="./gif/bubu-dudu-hug 7.gif" alt="Morning hug">
+                        </div>
+                        <div class="caption">Morning Hug ❤️</div>
+                    </div>
+                    
+                    <!-- 🖼️ GIF SLOT 3 - Cozy Hug -->
+                    <div class="polaroid-card" data-hug="cozy">
+                        <div class="photo-frame">
+                            <img src="./gif/bubu-dudu-hug 2.gif" alt="Cozy hug">
+                        </div>
+                        <div class="caption">Cozy Hug 🧡</div>
+                    </div>
+                    
+                    <!-- 🖼️ GIF SLOT 4 - Squeeze Hug -->
+                    <div class="polaroid-card" data-hug="squeeze">
+                        <div class="photo-frame">
+                            <img src="./gif/bubu-dudu-hug 8.gif" alt="Squeeze hug">
+                        </div>
+                        <div class="caption">Squeeze Hug 💗</div>
+                    </div>
+                    
+                    <!-- 🖼️ GIF SLOT 5 - Sleepy Hug -->
+                    <div class="polaroid-card" data-hug="sleepy">
+                        <div class="photo-frame">
+                            <img src="./gif/bubu-dudu-hug 9.gif" alt="Sleepy hug">
+                        </div>
+                        <div class="caption">Sleepy Hug 💤✨</div>
+                    </div>
+                </div>
+
+                <!-- Message box appears when you click a hug -->
+                <div class="hug-message-container">
+                    <div id="hugMessageBox" class="hug-message-box">
+                        ✨ Click any hug to read a sweet note ✨
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-prev btn">← ✨ Previous</button>
+                    <button class="btn-next btn">Next → ✨</button>
+                </div>
+                <div class="lights">🟡⚪🟡⚪🟡✨</div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 3 – HUG BENEFITS
+             ========================================== -->
+        <section class="page" id="page3">
+            <div class="page-content">
+                <h2 class="heading">✨ Why Hugs Are The Best ✨</h2>
+                <div class="benefits-cloud">
+                    <div class="cloud-bubble">
+                        <!-- 🖼️ GIF SLOT 6 - Cloud Hug GIF -->
+                        <!--
+                             INSTRUCTIONS:
+                             Replace src="PLACEHOLDER.gif" with your actual GIF filename
+                             Example: <img src="cloud-hug.gif" alt="Hug in cloud" class="cloud-gif">
+                        -->
+                        <img src="./gif/bubu-dudu-hug 6.gif" alt="Hug in cloud" class="cloud-gif">
+                        <span class="bubble-tail"></span>
+                    </div>
+                    <ul class="benefits-list">
+                        <li>🤗 Makes hearts warmer ✨</li>
+                        <li>💖 Stress melts away ✨</li>
+                        <li>☁️ Feels like floating ✨</li>
+                        <li>🧸 Feels like heaven ✨</li>
+                    </ul>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-prev btn">← ✨ Previous</button>
+                    <button class="btn-next btn">Next → ✨</button>
+                </div>
+                <div class="heart-float">❤️🧡💛💚💙💜✨</div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 4 – YES/NO HUG GAME
+             ========================================== -->
+        <section class="page" id="page4">
+            <div class="page-content">
+                <h2 class="heading">✨ One Last Question... ✨</h2>
+                <div class="question-box">
+                    <p class="question-text">Will you accept a thousand hugs?</p>
+                    <div class="yes-no-container">
+                        <button id="yesBtn" class="btn yes-btn">YES 💖</button>
+                        <button id="noBtn" class="btn no-btn">NO 🌸</button>
+                    </div>
+                </div>
+                <!-- Visual feedback area for refusal phrases -->
+                <div id="feedbackArea" class="feedback-area">
+                    💬 My answer will appear here...
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-prev btn">← ✨ Previous</button>
+                </div>
+                <div class="heart-float">❤️🧡💛💚💙💜✨</div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 5 – HUG COUNTER & BIG HUG
+             ========================================== -->
+        <section class="page" id="page5">
+            <div class="page-content">
+                <h2 class="heading">✨ Sending You The Biggest Hug! ✨</h2>
+                <div class="ribbon-wrap">
+                    <span class="ribbon left">🎀✨</span>
+                    <!-- 🖼️ GIF SLOT 7 - Big Final Hug GIF -->
+                    <!--
+                         INSTRUCTIONS:
+                         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+                         Example: <img src="big-hug.gif" alt="Big hug" class="big-hug-gif">
+                    -->
+                    <img src="./gif/bubu-dudu-hug 10.gif" alt="Big hug" class="big-hug-gif">
+                    <span class="ribbon right">🎀✨</span>
+                </div>
+                <p class="message-special">This hug is for you. Always. 💌✨</p>
+                <div class="hug-counter">
+                    <div class="counter-box">
+                        <span id="hugCount">0</span> hugs received
+                    </div>
+                    <button id="receiveHugBtn" class="btn-hug btn">Receive Hug → 💕✨</button>
+                </div>
+               <div class="nav-buttons">
+    <button id="startOverBtn" class="btn-startover btn">🌸 Start Over ✨</button>
+    <button id="homeBtn" class="btn">🏠 Go Home ✨</button>
+    <button class="btn-prev btn">← ✨ Previous</button>
+</div>
+
+                <div class="emoji-float">💗✨💖✨💘✨💝✨</div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ===== 1. LIGHTWEIGHT PARTICLE CANVAS =====
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            let particles = [];
+
+            const emojis = ['❤️', '💖', '💗', '✨', '💫', '🌟'];
+
+            function resizeCanvas() {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w;
+                canvas.height = h;
+            }
+
+            function createParticle(x = null, y = null, burst = false) {
+                return {
+                    x: x !== null ? x : Math.random() * w,
+                    y: y !== null ? y : (burst ? h * 0.6 : -10),
+                    size: Math.random() * 18 + 10,
+                    speedY: Math.random() * 1.2 + 0.4,
+                    speedX: (Math.random() - 0.5) * 0.2,
+                    emoji: emojis[Math.floor(Math.random() * emojis.length)],
+                    opacity: Math.random() * 0.5 + 0.3
+                };
+            }
+
+            for (let i = 0; i < 15; i++) particles.push(createParticle());
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, w, h);
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    ctx.font = `${p.size}px 'Segoe UI', 'Comic Neue', 'Apple Color Emoji', sans-serif`;
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillText(p.emoji, p.x, p.y);
+
+                    p.y += p.speedY;
+                    p.x += p.speedX + Math.sin(Date.now() * 0.001 + i) * 0.05;
+
+                    if (p.y > h + 40 || p.x < -40 || p.x > w + 40) {
+                        particles[i] = createParticle();
+                    }
+                }
+                requestAnimationFrame(drawParticles);
+            }
+
+            let lastBurst = 0;
+            function burstParticles(x, y, count = 6) {
+                const now = Date.now();
+                if (now - lastBurst < 80) return;
+                lastBurst = now;
+                for (let i = 0; i < count; i++) {
+                    let offsetX = (Math.random() - 0.5) * 120;
+                    let offsetY = (Math.random() - 0.5) * 120;
+                    particles.push(createParticle(x + offsetX, y + offsetY, true));
+                }
+                if (particles.length > 50) particles.splice(0, 20);
+            }
+
+            window.burst = burstParticles;
+
+            // First interaction also starts music
+            function playMusicOnFirstInteraction() {
+                if (!bgMusic || musicStarted) return;
+                bgMusic.play().then(() => {
+                    musicStarted = true;
+                    musicPlaying = true;
+                    if (musicToggle) musicToggle.textContent = '🔊';
+                }).catch(err => console.log('Autoplay blocked – user must click toggle'));
+            }
+
+            document.body.addEventListener('click', (e) => {
+                burstParticles(e.clientX, e.clientY, 5);
+                playMusicOnFirstInteraction();
+            });
+            document.body.addEventListener('touchstart', (e) => {
+                if (e.touches.length) burstParticles(e.touches[0].clientX, e.touches[0].clientY, 4);
+                playMusicOnFirstInteraction();
+            });
+
+            // ===== 2. PAGE TRANSITIONS =====
+            const pages = document.querySelectorAll('.page');
+            const nextBtns = document.querySelectorAll('.btn-next');
+            const prevBtns = document.querySelectorAll('.btn-prev');
+            const startOverBtn = document.getElementById('startOverBtn');
+
+            function showPage(index) {
+                pages.forEach((p, i) => p.classList.toggle('active', i === index));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                burstParticles(w / 2, h * 0.3, 8);
+
+                if (index === 0) {
+                    startWelcomeTyping();
+                }
+
+                // Reset YES button size when Page 5 is visited
+                if (pages[index].id === 'page5') {
+                    resetYesButtonSize();
+                }
+            }
+
+            nextBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                let cur = Array.from(pages).findIndex(p => p.classList.contains('active'));
+                showPage(cur < pages.length - 1 ? cur + 1 : 0);
+            }));
+
+            prevBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                let cur = Array.from(pages).findIndex(p => p.classList.contains('active'));
+                if (cur > 0) showPage(cur - 1);
+            }));
+
+            if (startOverBtn) {
+                startOverBtn.addEventListener('click', () => {
+                    showPage(0);
+                    hugCount = 0;
+                    updateHugDisplay();
+                    burstParticles(w / 2, h / 2, 12);
+                });
+            }
+            // ✅ HOME BUTTON - Navigate to main page
+const homeBtn = document.getElementById('homeBtn');
+if (homeBtn) {
+    homeBtn.addEventListener('click', () => {
+        // Change '../index.html' to your actual home page path
+        window.location.href = '../index.html';
+    });
+}
+
+            // ===== 3. WELCOME TYPING (PAGE 1) =====
+            const typingElement = document.getElementById('typingMessage');
+            const fullWelcomeText = typingElement ? typingElement.dataset.text : '';
+            let welcomeTimer = null;
+
+            function startWelcomeTyping() {
+                if (!typingElement) return;
+                if (welcomeTimer) clearInterval(welcomeTimer);
+                typingElement.innerHTML = '';
+                let i = 0;
+                const speed = 50;
+
+                function type() {
+                    if (i < fullWelcomeText.length) {
+                        if (fullWelcomeText.substr(i, 4) === '<br>') {
+                            typingElement.innerHTML += '<br>';
+                            i += 4;
+                        } else {
+                            typingElement.innerHTML += fullWelcomeText.charAt(i);
+                            i++;
+                        }
+                        welcomeTimer = setTimeout(type, speed);
+                    }
+                }
+                type();
+            }
+
+            if (document.querySelector('.page.active')?.id === 'page1') {
+                startWelcomeTyping();
+            }
+
+            // ===== 4. HUG CARD MESSAGES (PAGE 2) =====
+            const hugMessageBox = document.getElementById('hugMessageBox');
+            const polaroidCards = document.querySelectorAll('.polaroid-card');
+            let messageTimer = null;
+
+            const hugMessages = {
+                morning: "Good morning, sunshine! Hope your day is as warm and cozy as this hug. 🌞☁️✨",
+                cozy: "Wrapping you in a soft, warm blanket of love. Stay snug, sweetheart. 🧣🧸💖",
+                squeeze: "A big squeeze to say 'I miss you' a little extra today. Sending it right now! 🤗💞🌟",
+                sleepy: "Dream of fluffy clouds, marshmallows, and endless hugs. Sweet dreams! 🌙💤✨"
+            };
+
+            function startHugMessageTyping(message) {
+                if (!hugMessageBox) return;
+                if (messageTimer) clearTimeout(messageTimer);
+                hugMessageBox.innerHTML = '';
+                let i = 0;
+                const speed = 40;
+
+                function type() {
+                    if (i < message.length) {
+                        hugMessageBox.innerHTML += message.charAt(i);
+                        i++;
+                        messageTimer = setTimeout(type, speed);
+                    } else {
+                        const rect = hugMessageBox.getBoundingClientRect();
+                        burstParticles(rect.left + rect.width/2, rect.top + rect.height/2, 6);
+                    }
+                }
+                type();
+            }
+// ===== TRACK CLICKED HUGS =====
+const clickedHugs = new Set();
+const totalHugs = 4; // morning, cozy, squeeze, sleepy
+
+polaroidCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+        const hugType = this.dataset.hug;
+        const message = hugMessages[hugType] || "Sending you a warm hug! 💕";
+        
+        // ✅ TRACK THIS HUG
+        clickedHugs.add(hugType);
+        
+        startHugMessageTyping(message);
+        burstParticles(e.clientX, e.clientY, 8);
+        
+        // ✅ AUTO-SCROLL TO MESSAGE BOX
+        setTimeout(() => {
+            if (hugMessageBox) {
+                hugMessageBox.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
+        }, 300);
+        
+        // ✅ CHECK IF ALL HUGS CLICKED
+        if (clickedHugs.size === totalHugs) {
+            setTimeout(() => {
+                hugMessageBox.innerHTML = "🎉 You've explored all the hugs! Each one was made with love just for you! 💖✨";
+                burstParticles(window.innerWidth / 2, window.innerHeight / 2, 15);
+            }, 3000);
+        }
+    });
+});
+
+
+
+            // ===== 5. HUG COUNTER =====
+            let hugCount = 0;
+            const hugDisplay = document.getElementById('hugCount');
+            const receiveBtn = document.getElementById('receiveHugBtn');
+
+            function updateHugDisplay() {
+                if (hugDisplay) hugDisplay.innerText = hugCount;
+            }
+
+            function showPlusOne(x, y) {
+                const div = document.createElement('div');
+                div.className = 'plus-one';
+                div.innerText = '➕💖 +1';
+                div.style.left = x + 'px';
+                div.style.top = y + 'px';
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 1000);
+            }
+
+            if (receiveBtn) {
+                receiveBtn.addEventListener('click', function (e) {
+                    hugCount++;
+                    updateHugDisplay();
+                    const rect = receiveBtn.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2;
+                    const y = rect.top + rect.height / 2;
+                    burstParticles(x, y, 10);
+                    showPlusOne(x, y - 20);
+                });
+            }
+
+            updateHugDisplay();
+
+            // ===== 6. PAGE 4 – YES/NO HUG GAME =====
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const feedbackArea = document.getElementById('feedbackArea');
+
+            // YES button scale & glow
+            let yesButtonScaleLevel = 1.0;
+            const MAX_SCALE = 2.0;
+            const SCALE_STEP = 0.15;
+
+            const refusalPhrases = [
+                "Are you really sure? 🤔",
+                "But what if...? 🫣",
+                "You'd really want to? 💭",
+                "Don't tease me... ☺️",
+                "Hugs are a big deal! 😅",
+                "My heart's not ready! 💓",
+                "Are you certain? 🌸",
+                "You mean it? 🥺",
+                "But I might get shy... 🙈",
+                "What if I never let go? 💕"
+            ];
+
+            function updateYesButtonStyle() {
+                if (!yesBtn) return;
+                yesBtn.style.transform = `scale(${yesButtonScaleLevel})`;
+                const glowIntensity = Math.min(0.5 + (yesButtonScaleLevel - 1) * 0.7, 1.5);
+                yesBtn.style.boxShadow = `0 10px 0 #c06a7a, 0 0 ${20 + glowIntensity * 30}px #ff8cae, 0 0 ${40 + glowIntensity * 40}px #ffb3c6`;
+                yesBtn.classList.add('yes-btn-glow');
+            }
+
+            function resetYesButtonSize() {
+                yesButtonScaleLevel = 1.0;
+                if (yesBtn) {
+                    yesBtn.style.transform = 'scale(1)';
+                    yesBtn.style.boxShadow = '';
+                    yesBtn.classList.remove('yes-btn-glow');
+                }
+            }
+
+            // NO button click handler
+            if (noBtn && yesBtn && feedbackArea) {
+                noBtn.addEventListener('click', function(e) {
+                    const randomIndex = Math.floor(Math.random() * refusalPhrases.length);
+                    feedbackArea.textContent = refusalPhrases[randomIndex];
+                    
+                    yesButtonScaleLevel = Math.min(yesButtonScaleLevel + SCALE_STEP, MAX_SCALE);
+                    updateYesButtonStyle();
+
+                    burstParticles(e.clientX, e.clientY, 8);
+                });
+            }
+
+            // ===== CELEBRATION OVERLAY =====
+            const celebrationEmojis = ['🎉', '🎊', '🥳', '🎈', '🎂', '🍰', '💖', '✨', '💕', '🌟', '🎀', '🌸', '⭐', '💫'];
+
+            function createCelebrationParticle() {
+                const div = document.createElement('div');
+                div.className = 'celebration-particle';
+                
+                const emoji = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
+                div.textContent = emoji;
+
+                const top = Math.random() * 80 + 10;
+                div.style.top = top + 'vh';
+
+                const fromLeft = Math.random() < 0.5;
+                if (fromLeft) {
+                    div.style.left = '-5vw';
+                    div.style.setProperty('--driftX', '120vw');
+                } else {
+                    div.style.right = '-5vw';
+                    div.style.setProperty('--driftX', '-120vw');
+                }
+
+                const size = Math.floor(Math.random() * 30 + 24);
+                div.style.fontSize = size + 'px';
+
+                const driftY = Math.random() * -400 - 100;
+                div.style.setProperty('--driftY', driftY + 'px');
+
+                const rotate = Math.random() * 720;
+                div.style.setProperty('--rotate', rotate + 'deg');
+
+                const delay = Math.random() * 0.3;
+                div.style.animationDelay = delay + 's';
+
+                div.style.opacity = Math.random() * 0.5 + 0.5;
+
+                document.body.appendChild(div);
+
+                setTimeout(() => {
+                    if (div.parentNode) div.remove();
+                }, 2300);
+            }
+
+            function celebrateYES() {
+                const particleCount = 60;
+                for (let i = 0; i < particleCount; i++) {
+                    setTimeout(createCelebrationParticle, i * 10);
+                }
+                setTimeout(() => {
+                    for (let i = 0; i < 20; i++) createCelebrationParticle();
+                }, 200);
+                setTimeout(() => {
+                    for (let i = 0; i < 15; i++) createCelebrationParticle();
+                }, 400);
+            }
+
+            // YES button: celebrate + go to next page
+            if (yesBtn) {
+                yesBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    celebrateYES();
+                    burstParticles(e.clientX, e.clientY, 20);
+                    
+                    const cur = Array.from(pages).findIndex(p => p.classList.contains('active'));
+                    if (cur < pages.length - 1) {
+                        showPage(cur + 1);
+                    }
+                });
+            }
+
+            // ===== 7. OFFLINE MUSIC with toggle =====
+            const bgMusic = document.getElementById('bgMusic');
+            const musicToggle = document.getElementById('musicToggle');
+            let musicStarted = false;
+            let musicPlaying = false;
+
+            if (musicToggle && bgMusic) {
+                musicToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (bgMusic.paused) {
+                        bgMusic.play().then(() => {
+                            musicToggle.textContent = '🔊';
+                            musicPlaying = true;
+                            musicStarted = true;
+                        }).catch(err => console.log('Play failed:', err));
+                    } else {
+                        bgMusic.pause();
+                        musicToggle.textContent = '🎵';
+                        musicPlaying = false;
+                    }
+                    burstParticles(e.clientX, e.clientY, 6);
+                });
+            }
+
+            // ===== 8. START CANVAS =====
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            drawParticles();
+
+            setTimeout(() => burstParticles(w / 2, h / 3, 10), 200);
+        });
+    </script>
+</body>
+</html>

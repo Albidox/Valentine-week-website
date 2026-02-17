@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Rose Day 🌹 | Bubu & Dudu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ========================================
+       RESET AND BASE STYLES
+       ======================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+   body {
+    font-family: Arial, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8 0%, #fff0f5 25%, #ffe6f2 50%, #ffd6e8 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;  /* ✅ ADDED THIS LINE */
+    min-height: 100vh;
+    position: relative;
+}
+
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ========================================
+       PAGE TRANSITIONS
+       ======================================== */
+  .page {
+    display: none;
+    position: relative;  /* ✅ CHANGED FROM FIXED TO RELATIVE */
+    width: 100%;
+    min-height: 100vh;  /* ✅ CHANGED FROM HEIGHT TO MIN-HEIGHT */
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    z-index: 1;
+    overflow-y: auto;  /* ✅ ADDED TO ENABLE SCROLLING */
+}
+
+
+    .page.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: pageFadeIn 1s ease;
+    }
+
+    @keyframes pageFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .page-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(214, 51, 108, 0.15),
+                  0 0 0 1px rgba(255, 255, 255, 0.3),
+                  inset 0 0 20px rgba(255, 255, 255, 0.5);
+      position: relative;
+      overflow: hidden;
+      animation: floatContainer 6s ease-in-out infinite;
+    }
+
+    @keyframes floatContainer {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ========================================
+       BUBU & DUDU GIF STYLING
+       ======================================== */
+    .bubu-dudu-intro {
+      margin: 20px auto;
+      padding: 15px;
+    }
+
+    .bubu-dudu-gif-small {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 15px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(214, 51, 108, 0.2);
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+      background: linear-gradient(135deg, #ffe6f2, #ffd6e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+    }
+
+    .bubu-dudu-side {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      width: 120px;
+      height: 120px;
+      z-index: 2;
+    }
+
+    .side-gif {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(214, 51, 108, 0.2);
+      animation: sideFloat 5s ease-in-out infinite;
+      background: linear-gradient(135deg, #ffe6f2, #ffd6e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5em;
+    }
+
+    @keyframes sideFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    .bubu-dudu-main {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #ffe6f2, #ffd6e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4em;
+    }
+
+    .bubu-dudu-main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+      animation: shine 3s infinite;
+      z-index: 1;
+    }
+
+    .bubu-dudu-rose {
+      margin: 25px auto;
+      width: 120px;
+      height: 120px;
+      animation: rotateSlow 8s linear infinite;
+    }
+
+   .bubu-dudu-celebration {
+  width: 100%;
+  max-width: 600px;  /* ✅ ADDED - LIMITS WIDTH */
+  height: 350px;  /* ✅ INCREASED FROM 300px TO 350px - MORE VERTICAL SPACE */
+  margin: 0 auto;  /* ✅ ADDED - CENTERS IT */
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #ffe6f2, #ffd6e8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5em;
+  box-shadow: 0 20px 60px rgba(214, 51, 108, 0.2);
+  z-index: 2;
+}
+
+
+    .bubu-dudu-celebration::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: linear-gradient(45deg, 
+                  transparent 30%, 
+                  rgba(255, 255, 255, 0.8) 50%, 
+                  transparent 70%);
+      animation: shine 3s infinite;
+      z-index: 1;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+   .signature-gif {
+  width: 180px;  /* ✅ INCREASED FROM 80px TO 180px - WIDER */
+  height: 120px;  /* ✅ INCREASED FROM 80px TO 120px - MORE SPACIOUS */
+  margin: 0 auto 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  animation: pulse 2s infinite;
+  background: linear-gradient(135deg, #ffe6f2, #ffd6e8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+}
+
+
+    .signature-text {
+      font-size: 1.3em;
+      color: #d6336c;
+      font-weight: bold;
+      font-family: 'Brush Script MT', cursive;
+    }
+
+    .intro-text {
+      font-size: 1.2em;
+      color: #ff4d6d;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    .title-glow {
+      font-size: 3em;
+      color: #d6336c;
+      text-shadow: 0 0 20px rgba(214, 51, 108, 0.4),
+                   0 0 40px rgba(214, 51, 108, 0.2),
+                   0 0 60px rgba(214, 51, 108, 0.1);
+      margin-bottom: 20px;
+      position: relative;
+      animation: titleGlow 2s infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from { text-shadow: 0 0 20px rgba(214, 51, 108, 0.4); }
+      to { text-shadow: 0 0 30px rgba(214, 51, 108, 0.6); }
+    }
+
+    .heart-beat {
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .heart-line {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff4d6d, transparent);
+      margin: 20px auto 30px;
+      position: relative;
+    }
+
+    .heart-line::before,
+    .heart-line::after {
+      content: '❤️';
+      position: absolute;
+      top: -12px;
+      font-size: 20px;
+      animation: floatSide 3s infinite ease-in-out;
+    }
+
+    .heart-line::before {
+      left: 0;
+      animation-delay: 0s;
+    }
+
+    .heart-line::after {
+      right: 0;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes floatSide {
+      0%, 100% { transform: translateX(0) scale(1); }
+      50% { transform: translateX(10px) scale(1.2); }
+    }
+
+    .typing-text {
+      font-size: 1.3em;
+      color: #666;
+      line-height: 1.8;
+      margin: 30px 0;
+      opacity: 0;
+      animation: typing 2s steps(40, end) forwards,
+                 blinkCaret 0.75s step-end infinite;
+      white-space: normal;
+      overflow: hidden;
+      border-right: 3px solid #ff4d6d;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes typing {
+      from { width: 0; opacity: 1; }
+      to { width: 100%; opacity: 1; }
+    }
+
+    @keyframes blinkCaret {
+      from, to { border-color: transparent; }
+      50% { border-color: #ff4d6d; }
+    }
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+    .magic-btn {
+      position: relative;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #ff4d6d, #d6336c);
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      margin-top: 30px;
+      box-shadow: 0 10px 30px rgba(214, 51, 108, 0.3);
+    }
+
+    .magic-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(214, 51, 108, 0.4);
+    }
+
+    .magic-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .magic-btn .btn-sparkle {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .magic-btn:hover .btn-sparkle {
+      opacity: 0.6;
+      animation: sparkle 1.5s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+
+    /* ========================================
+       LETTER SECTION (PAGE 2)
+       ======================================== */
+
+
+    .page#page2 .page-container {
+      min-height: auto;
+      height: auto;
+    }
+
+    .letter {
+      cursor: pointer;
+      perspective: 1000px;
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      margin: 0 auto;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .envelope:hover {
+      transform: translateY(-10px) rotateX(10deg);
+    }
+
+    .envelope-front {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff6b9d, #ff4d6d);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 15px 35px rgba(214, 51, 108, 0.3);
+      z-index: 2;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(135deg, #ff8fab, #ff6b9d);
+      border-radius: 15px 15px 0 0;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      transform-origin: top;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .letter.opened .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-heart {
+      font-size: 3em;
+      margin-bottom: 15px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .envelope-text {
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .message {
+      display: none;
+      background: linear-gradient(135deg, #fffafc, #fff0f5);
+      padding: 40px;
+      border-radius: 20px;
+      margin-top: 30px;
+      box-shadow: 0 20px 60px rgba(214, 51, 108, 0.15);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: messageReveal 0.8s forwards 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes messageReveal {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .message::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #ff4d6d, #ff8fab, #ff4d6d);
+    }
+
+    .letter-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .letter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px dashed #ffb3c6;
+    }
+
+    .letter-heart {
+      font-size: 2.5em;
+      animation: heartbeat 2s infinite;
+    }
+
+    .letter-date {
+      font-size: 1.2em;
+      color: #d6336c;
+      font-weight: bold;
+    }
+
+    .letter-text {
+      font-size: 1.1em;
+      color: #666;
+      line-height: 1.8;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .letter-signature {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2em;
+      color: #d6336c;
+      text-align: right;
+      margin-top: 30px;
+    }
+
+    /* ========================================
+       COUPLE SECTION (PAGE 3)
+       ======================================== */
+    .couple-container {
+      position: relative;
+      margin: 40px auto;
+      max-width: 400px;
+    }
+
+    .couple-frame {
+      position: relative;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff0f5, #ffe6f2);
+      border-radius: 25px;
+      box-shadow: 0 20px 50px rgba(214, 51, 108, 0.2);
+      transform-style: preserve-3d;
+      animation: floatFrame 6s ease-in-out infinite;
+    }
+
+    @keyframes floatFrame {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(0.5deg); }
+    }
+
+    .frame-border {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 2px dashed #ff8fab;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .frame-content {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 250px;
+    }
+
+    .floating-hearts-small {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+
+    .floating-hearts-small::before,
+    .floating-hearts-small::after {
+      content: '❤️';
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 3s ease-in-out infinite;
+    }
+
+    .floating-hearts-small::before {
+      top: 20px;
+      left: 20px;
+      animation-delay: 0s;
+    }
+
+    .floating-hearts-small::after {
+      bottom: 20px;
+      right: 20px;
+      animation-delay: 1.5s;
+    }
+
+    .frame-heart {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      font-size: 2em;
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .romantic-text {
+      font-size: 1.4em;
+      color: #d6336c;
+      font-style: italic;
+      margin: 30px 0;
+      position: relative;
+      padding: 20px;
+    }
+
+    .romantic-text::before,
+    .romantic-text::after {
+      content: '❝';
+      font-size: 2em;
+      color: #ff8fab;
+      position: absolute;
+      opacity: 0.5;
+    }
+
+    .romantic-text::before {
+      top: 0;
+      left: 0;
+    }
+
+    .romantic-text::after {
+      bottom: 0;
+      right: 0;
+      transform: rotate(180deg);
+    }
+
+    /* ========================================
+       ROSE SELECTION (PAGE 4)
+       ======================================== */
+   
+
+    .page#page4 .page-container {
+      min-height: auto;
+      height: auto;
+    }
+
+    .subtitle {
+      font-size: 1.3em;
+      color: #ff6b9d;
+      margin-bottom: 40px;
+      animation: colorShift 3s infinite alternate;
+    }
+
+    @keyframes colorShift {
+      from { color: #ff6b9d; }
+      to { color: #d6336c; }
+    }
+
+    .rose-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 25px;
+      margin: 40px auto;
+      max-width: 800px;
+    }
+
+    .rose-option {
+      position: relative;
+      padding: 25px 15px;
+      background: linear-gradient(135deg, #fffafc, #ffe6f2);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(214, 51, 108, 0.1);
+      overflow: hidden;
+    }
+
+    .rose-option:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 25px 50px rgba(214, 51, 108, 0.2);
+    }
+
+    .rose-option:hover .rose-icon {
+      transform: scale(1.3) rotate(15deg);
+    }
+
+    .rose-icon {
+      font-size: 4em;
+      margin-bottom: 15px;
+      transition: all 0.4s ease;
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    .rose-label {
+      font-size: 1.1em;
+      color: #ff8fab;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .rose-sparkle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                  rgba(255,255,255,0.8) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .rose-option:hover .rose-sparkle {
+      opacity: 0.6;
+    }
+
+    .special-rose {
+      background: linear-gradient(135deg, #ffe6f2, #ffd6e8);
+      border: 2px solid #ff4d6d;
+      animation: specialGlow 2s infinite alternate;
+    }
+
+    @keyframes specialGlow {
+      from { box-shadow: 0 10px 30px rgba(214, 51, 108, 0.2); }
+      to { box-shadow: 0 10px 40px rgba(214, 51, 108, 0.4), 
+                      0 0 30px rgba(255, 77, 109, 0.3); }
+    }
+
+    .special-rose .rose-label {
+      color: #ff4d6d;
+      font-weight: 700;
+    }
+
+    .special-rose .rose-icon {
+      animation: specialRoseGlow 2s infinite alternate;
+    }
+
+    @keyframes specialRoseGlow {
+      0% {
+        color: #ff4d6d;
+        text-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
+      }
+      50% {
+        color: #ff8fab;
+        text-shadow: 0 0 20px rgba(255, 143, 171, 0.8);
+      }
+      100% {
+        color: #ffccd5;
+        text-shadow: 0 0 15px rgba(255, 204, 213, 0.7);
+      }
+    }
+
+    .special-glow {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle at center, 
+                  rgba(255, 77, 109, 0.2) 0%, transparent 70%);
+      border-radius: 30px;
+      animation: pulse 2s infinite;
+      z-index: -1;
+    }
+
+    .rose-message-container {
+      margin-top: 40px;
+      padding: 30px;
+      background: linear-gradient(135deg, #fffafc, #ffe6f2);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(214, 51, 108, 0.1);
+      animation: slideUp 0.8s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rose-msg {
+      font-size: 1.4em;
+      color: #d6336c;
+      font-style: italic;
+      line-height: 1.6;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: textFadeIn 0.5s ease;
+    }
+
+    @keyframes textFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .accept-btn {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff8fab, #ff4d6d, #d6336c);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ========================================
+       FINAL PAGE (PAGE 5)
+       ======================================== */
+  
+
+    .page#page5 .page-container {
+      min-height: auto;
+      height: auto;
+    }
+
+  .celebration-container {
+  position: relative;
+  margin: 40px auto 60px;  /* ✅ ADDED 60px BOTTOM MARGIN */
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;  /* ✅ ADDED - PREVENTS OVERFLOW */
+}
+
+
+   .confetti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;  /* ✅ ADDED */
+  left: 0;  /* ✅ ADDED */
+  background-image: 
+    radial-gradient(circle at 20% 30%, #ff6b9d 2px, transparent 3px),
+    radial-gradient(circle at 40% 70%, #ff4d6d 2px, transparent 3px),
+    radial-gradient(circle at 60% 20%, #ff8fab 2px, transparent 3px),
+    radial-gradient(circle at 80% 50%, #ffb3c6 2px, transparent 3px);
+  background-size: 100px 100px;
+  animation: confettiFall 10s linear infinite;
+  z-index: 0;  /* ✅ CHANGED FROM 1 TO 0 */
+  pointer-events: none;  /* ✅ ADDED */
+}
+
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-100%) rotate(0deg); }
+      100% { transform: translateY(100%) rotate(360deg); }
+    }
+
+   .hearts-burst {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;  /* ✅ REDUCED FROM 3 TO 1 */
+  pointer-events: none;
+  overflow: hidden;  /* ✅ ADDED */
+}
+
+    .hearts-burst::before,
+    .hearts-burst::after {
+      content: '❤️';
+      position: absolute;
+      font-size: 2em;
+      animation: burst 2s ease-out infinite;
+    }
+
+    .hearts-burst::before {
+      top: 20%;
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .hearts-burst::after {
+      top: 40%;
+      right: 20%;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes burst {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+   .final-message {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 25px;
+  margin: 20px 0 40px;  /* ✅ REDUCED TOP MARGIN */
+  box-shadow: 0 20px 50px rgba(214, 51, 108, 0.15);
+  position: relative;
+  overflow: hidden;
+  z-index: 10;  /* ✅ ADDED - ENSURES IT'S ON TOP */
+}
+
+
+    .final-message h2 {
+      color: #d6336c;
+      font-size: 2.2em;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .final-message h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 25%;
+      right: 25%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff4d6d, transparent);
+    }
+
+    .final-message p {
+      font-size: 1.2em;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+  .bubu-dudu-signature {
+  margin-top: 30px;
+  padding: 25px 40px;  /* ✅ MORE PADDING FOR WIDTH */
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  border: 2px dashed #ffb3c6;
+  max-width: 350px;  /* ✅ WIDER CONTAINER */
+  margin-left: auto;  /* ✅ CENTER IT */
+  margin-right: auto;  /* ✅ CENTER IT */
+}
+
+
+    .restart-btn {
+      background: linear-gradient(135deg, #ff8fab, #ff4d6d);
+      margin-top: 30px;
+    }
+
+    /* ========================================
+       MUSIC CONTROL
+       ======================================== */
+    .music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(214, 51, 108, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .music-control:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .music-control i {
+      color: #ff4d6d;
+      font-size: 1.2em;
+    }
+
+    .music-text {
+      color: #d6336c;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    /* ========================================
+       BACKGROUND EFFECTS
+       ======================================== */
+    .rose-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -2;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff4d6d" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+      background-repeat: repeat;
+      background-size: 40px 40px;
+      animation: roseFall 20s linear infinite;
+      opacity: 0.1;
+    }
+
+    @keyframes roseFall {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .sparkle-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 30%, 
+                  rgba(255, 255, 255, 0.1) 0%, 
+                  transparent 50%),
+                  radial-gradient(circle at 80% 70%, 
+                  rgba(255, 214, 232, 0.1) 0%, 
+                  transparent 50%);
+      animation: sparkleMove 20s infinite alternate;
+    }
+
+    @keyframes sparkleMove {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+
+    .twinkling-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .floating-petals {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      background-image: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff8fab" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/></svg>');
+      background-repeat: repeat;
+      background-size: 30px 30px;
+      opacity: 0.1;
+      animation: floatPetals 30s linear infinite;
+    }
+
+    @keyframes floatPetals {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(10deg); }
+    }
+
+    .floating-rose {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 3em;
+      animation: floatRotate 8s ease-in-out infinite;
+      filter: drop-shadow(0 5px 15px rgba(214, 51, 108, 0.3));
+    }
+
+    @keyframes floatRotate {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+      25% { 
+        transform: translateY(-20px) rotate(90deg) scale(1.1);
+      }
+      50% { 
+        transform: translateY(0) rotate(180deg) scale(1);
+      }
+      75% { 
+        transform: translateY(20px) rotate(270deg) scale(0.9);
+      }
+    }
+
+    /* ========================================
+       ANIMATION EFFECTS
+       ======================================== */
+    @keyframes sparkleAnim {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(3); }
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-200px) rotate(360deg);
+      }
+    }
+
+    @keyframes celebrationSparkle {
+      0% { opacity: 0; transform: scale(0); }
+      50% { opacity: 0.5; transform: scale(2); }
+      100% { opacity: 0; transform: scale(4); }
+    }
+
+    /* ========================================
+       RESPONSIVE DESIGN
+       ======================================== */
+   @media (max-width: 768px) {
+    .title-glow { font-size: 2.5em; }
+    
+    /* ✅ ADDED FOR SCROLLING FIX */
+    .page {
+        padding: 10px;
+        min-height: 100vh;
+    }
+    
+    .page-container { 
+        padding: 15px;
+        margin: 10px;
+        max-height: none;  /* ✅ IMPORTANT FOR SCROLLING */
+    }
+    
+    .rose-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .envelope { width: 250px; height: 180px; }
+    .bubu-dudu-main { height: 200px; }
+  .bubu-dudu-celebration { height: 280px; max-width: 100%; }  /* ✅ SEPARATE RULE */
+    .final-message { padding: 25px; }
+    .final-message h2 { font-size: 1.8em; }
+    .music-control { top: 10px; right: 10px; padding: 10px 15px; }
+    .bubu-dudu-side { position: relative; top: 0; right: 0; margin: 20px auto; width: 100px; height: 100px; }
+    .letter { margin: 15px auto; }
+    .envelope-heart { font-size: 40px; }
+    .message { padding: 20px; margin: 15px auto 30px; }
+   .celebration-container { 
+        width: 100%; 
+        max-width: 400px;
+        height: auto;
+        margin: 20px auto 40px; 
+    }
+    
+    .bubu-dudu-celebration { 
+        height: 280px;
+        max-width: 100%;
+    }
+}
+
+
+    @media (max-width: 480px) {
+      .title-glow {
+        font-size: 2em;
+      }
+      
+      .typing-text {
+        font-size: 1.1em;
+      }
+      
+      .rose-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+      
+      .envelope {
+        width: 200px;
+        height: 150px;
+      }
+      
+      .envelope-heart {
+        font-size: 2em;
+      }
+      
+      .message {
+        padding: 20px;
+      }
+      
+      .magic-btn {
+        padding: 14px 30px;
+        font-size: 1.1em;
+      }
+      
+        /* ✅ SIGNATURE GIF MOBILE FIX */
+  .signature-gif {
+    width: 140px;
+    height: 100px;
+  }
+  
+  .bubu-dudu-signature {
+    padding: 20px;
+    max-width: 280px;
+  }
+
+
+      .page#page2 {
+        padding: 10px;
+      }
+      
+      .page#page2 .page-container {
+        padding: 10px;
+      }
+      
+      .envelope {
+        height: 180px;
+      }
+      
+      .envelope-heart {
+        font-size: 35px;
+      }
+      
+      .message {
+        padding: 15px;
+        margin: 10px auto 25px;
+      }
+      
+      .letter-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+      
+      .page#page4 .page-container {
+        padding: 5px 10px;
+        min-height: calc(100vh - 10px);
+      }
+      
+      .page#page5 {
+        padding: 10px;
+      }
+      
+      .page#page5 .page-container {
+        padding: 10px;
+      }
+      
+       .celebration-container {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        margin: 15px auto 30px;
+    }
+    
+    .bubu-dudu-celebration {
+        height: 220px;
+        max-width: 100%;
+    }
+    
+    .final-message {
+        padding: 20px;
+        margin: 15px 0 30px;
+    }
+    
+    .final-message h2 {
+        font-size: 1.5em;
+    }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="rose-rain"></div>
+  <div class="floating-hearts"></div>
+  <div class="sparkle-overlay"></div>
+  <div class="twinkling-stars"></div>
+
+  <!-- ==========================================
+       🎵 MUSIC SLOT - ADD YOUR MUSIC FILE HERE
+       ========================================== -->
+  <!-- 
+       INSTRUCTIONS:
+       1. Add your music file (MP3 format recommended) to the same folder as this HTML file
+       2. Replace "YOUR_MUSIC_FILE.mp3" below with your actual filename
+       Example: <source src="romantic-song.mp3" type="audio/mpeg">
+  -->
+  <audio id="bg-music" loop>
+    <source src="./gifs/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Music Control Button -->
+  <div class="music-control" onclick="toggleMusic()">
+    <i class="fas fa-music"></i>
+    <span class="music-text">Play Music</span>
+  </div>
+
+  <!-- ==========================================
+       PAGE 1 - WELCOME
+       ========================================== -->
+  <div class="page active" id="page1">
+    <div class="page-container">
+      <div class="floating-rose">🌹</div>
+      <h1 class="title-glow">Happy Rose Day <span class="heart-beat">🌹</span></h1>
+      <div class="heart-line"></div>
+      
+      <!-- 🖼️ GIF SLOT 1 - Intro Bubu Dudu GIF -->
+      <!--
+          INSTRUCTIONS:
+          Replace the emoji (🐻💕🐰) with your actual GIF
+          Method 1 (Recommended): Add inline style with background-image
+          Example: style="background-image: url('bubu-dudu-intro.gif'); background-size: cover; background-position: center;"
+          
+          Method 2: Replace the div content with an img tag
+          Example: <img src="bubu-dudu-intro.gif" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+      -->
+      <div class="bubu-dudu-intro">
+          <div class="bubu-dudu-gif-small" id="bubuDuduIntro" style="background-image: url('./gifs/bubu-dudu-intro.gif'); background-size: cover; background-position: center center;"></div>
+        <p class="intro-text">With love from Someone Who Admire You 💕</p>
+      </div>
+      
+      <p class="typing-text">
+        This rose is for you, for us, for every beautiful feeling we share.<br>
+        You are the calm in my chaos,  
+        the smile I never get tired of,  
+        and the feeling I always choose.
+      </p>
+      <button class="magic-btn" onclick="nextPage(2)">
+        <span class="btn-text">Open 🌸</span>
+        <div class="btn-sparkle"></div>
+      </button>
+      <div class="floating-petals"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 2 - LETTER
+       ========================================== -->
+  <div class="page" id="page2">
+    <div class="page-container">
+      <h1 class="title-glow">A Letter for You 💌</h1>
+      <div class="heart-line"></div>
+      
+      <!-- 🖼️ GIF SLOT 2 - Side Bubu Dudu GIF -->
+      <!--
+          INSTRUCTIONS:
+          Replace the emoji (🐻✨🐰) with your actual GIF
+          Example: style="background-image: url('bubu-dudu-side.gif'); background-size: cover; background-position: center;"
+      -->
+      <div class="bubu-dudu-side">
+        <div class="side-gif" id="bubuDuduSide" 
+     style="background-image: url('./gifs/bubu-dudu-side.gif'); background-size: cover; background-position: center;">
+</div>
+        </div>
+      </div>
+      
+      <div class="letter" onclick="openLetter()">
+        <div class="envelope">
+          <div class="envelope-front">
+            <div class="envelope-heart">❤️</div>
+            <div class="envelope-text">Click to Open</div>
+          </div>
+          <div class="envelope-flap"></div>
+        </div>
+        <div class="message">
+          <div class="message-content">
+            <div class="letter-header">
+              <div class="letter-heart">💖</div>
+              <div class="letter-date">Rose Day</div>
+            </div>
+            <p class="letter-text">
+              On this Rose Day, I want to give you more than just a rose—I want to give you my heart. 
+              Just like a rose adds beauty and warmth wherever it blooms, you've filled my life with love, 
+              smiles, and endless happiness. Every petal reminds me of your kindness, and every fragrance 
+              feels like your presence close to me.
+              <br><br>
+              No matter the color, no matter the day, you will always be my favorite rose, 
+              blooming forever in my heart. 🌹✨
+            </p>
+            <div class="letter-signature">With all my love</div>
+          </div>
+          <button class="magic-btn" onclick="nextPage(3)">
+            <span class="btn-text">Next 🌹</span>
+            <div class="btn-sparkle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 3 - COUPLE
+       ========================================== -->
+  <div class="page" id="page3">
+    <div class="page-container">
+      <h1 class="title-glow">Our Little World <span class="heart-beat">💑</span></h1>
+      <div class="heart-line"></div>
+      
+      <div class="couple-container">
+        <div class="couple-frame">
+          <div class="frame-border"></div>
+          <div class="frame-content">
+            <!-- 🖼️ GIF SLOT 3 - Main Couple Bubu Dudu GIF -->
+            <!--
+                INSTRUCTIONS:
+                Replace the emoji (🐻❤️🐰) with your actual GIF
+                Example: style="background-image: url('bubu-dudu-couple.gif'); background-size: cover; background-position: center;"
+            -->
+            <div class="bubu-dudu-main" id="bubuDuduMain" 
+     style="background-image: url('./gifs/bubu-dudu-couple.gif'); background-size: cover; background-position: center;">
+</div>
+            <div class="floating-hearts-small"></div>
+          </div>
+          <div class="frame-heart">❤️</div>
+        </div>
+      </div>
+      
+      <p class="romantic-text">
+        Two hearts. One feeling.<br>
+        Everything feels softer with you.
+      </p>
+      
+      <button class="magic-btn" onclick="nextPage(4)">
+        <span class="btn-text">Give a Rose 🌹</span>
+        <div class="btn-sparkle"></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 4 - ROSE SELECTION
+       ========================================== -->
+  <div class="page" id="page4">
+    <div class="page-container">
+     <h1 class="title-glow">Choose Your Rose <span class="heart-beat">🌹</span></h1>
+<div class="heart-line"></div>
+<p class="subtitle">Each rose hides a special feeling... pick one 💗</p>
+<!-- ✅ NEW HINT -->
+<p style="font-size: 1.1em; color: #ff8fab; font-style: italic; margin: -20px 0 20px 0; animation: pulse 2s infinite;">
+  ✨ Hint: Try every rose to discover something special ✨
+</p>
+
+      
+     <div class="rose-grid">
+  <div class="rose-option" onclick="roseMessage(1)">
+    <div class="rose-icon" style="color: #d6336c;">🌹</div>
+    <div class="rose-label">Red Rose</div>
+    <div class="rose-sparkle"></div>
+  </div>
+  <div class="rose-option" onclick="roseMessage(2)">
+    <div class="rose-icon" style="color: #ffb3d9;">🌸</div>
+    <div class="rose-label">Pink Rose</div>
+    <div class="rose-sparkle"></div>
+  </div>
+  <div class="rose-option" onclick="roseMessage(3)">
+    <div class="rose-icon" style="color: #fff;">🤍</div>
+    <div class="rose-label">White Rose</div>
+    <div class="rose-sparkle"></div>
+  </div>
+  <div class="rose-option" onclick="roseMessage(4)">
+    <div class="rose-icon" style="color: #ffd700;">🌻</div>
+    <div class="rose-label">Yellow Rose</div>
+    <div class="rose-sparkle"></div>
+  </div>
+  <div class="rose-option special-rose" onclick="roseMessage(5)">
+    <div class="rose-icon">💐</div>
+    <div class="rose-label">Special Rose</div>
+    <div class="rose-sparkle"></div>
+    <div class="special-glow"></div>
+  </div>
+</div>
+
+      
+      <!-- 🖼️ GIF SLOT 4 - Rose Bubu Dudu GIF -->
+      <!--
+          INSTRUCTIONS:
+          Replace the emoji (🐻🌹🐰) with your actual GIF
+          Example: style="background-image: url('bubu-dudu-rose.gif'); background-size: cover; background-position: center;"
+      -->
+      <div class="bubu-dudu-rose">
+        <div class="bubu-dudu-gif-small" id="bubuDuduRose" 
+     style="background-image: url('./gifs/bubu-dudu-rose.gif'); background-size: cover; background-position: center;">
+</div>
+      </div>
+      
+      <div class="rose-message-container">
+        <p id="roseMsg" class="rose-msg">Choose a rose to reveal its message...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 5 - THANK YOU / CELEBRATION
+       ========================================== -->
+  <div class="page" id="page5">
+    <div class="page-container">
+      <h1 class="title-glow">Thank You! <span class="heart-beat">💖</span></h1>
+      <div class="heart-line"></div>
+      
+      <div class="celebration-container">
+        <div class="confetti"></div>
+        <!-- 🖼️ GIF SLOT 5 - Celebration Bubu Dudu GIF -->
+        <!--
+            INSTRUCTIONS:
+            Replace the emoji (🐻🎉🐰) with your actual GIF
+            Example: style="background-image: url('bubu-dudu-celebration.gif'); background-size: cover; background-position: center;"
+        -->
+      <div class="bubu-dudu-celebration" id="bubuDuduCelebration" 
+     style="background-image: url('./gifs/bubu-dudu-celebration.gif'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+</div>
+
+        <div class="hearts-burst"></div>
+      </div>
+      
+      <div class="final-message">
+        <h2>Thank you for accepting my rose 🌹</h2>
+        <p>
+          This moment means more than words can say. With this rose, I give you a piece of my heart, 
+          my feelings, and my promise to always care for you. Your smile makes everything brighter, 
+          and your presence turns ordinary moments into something magical. I hope this rose reminds you 
+          that you are deeply cherished today and always. 💕✨
+        </p>
+        <div class="bubu-dudu-signature">
+          <!-- 🖼️ GIF SLOT 6 - Signature Bubu Dudu GIF -->
+          <!--
+              INSTRUCTIONS:
+              Replace the emoji (🐻💝🐰) with your actual GIF
+              Example: style="background-image: url('bubu-dudu-signature.gif'); background-size: cover; background-position: center;"
+          -->
+          <div class="signature-gif" id="bubuDuduSignature" 
+     style="background-image: url('./gifs/bubu-dudu-signature.gif'); background-size: cover; background-position: center;">
+</div>
+          <div class="signature-text">I LOVE YOU 💕</div>
+        </div>
+      </div>
+      
+     <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+  <button class="magic-btn restart-btn" onclick="nextPage(1)">
+    <span class="btn-text">Start Again 🌸</span>
+    <div class="btn-sparkle"></div>
+  </button>
+  
+  <!-- ✅ NEW HOME BUTTON -->
+  <button class="magic-btn" onclick="goToHome()">
+    <span class="btn-text">🏠 Go to Home</span>
+    <div class="btn-sparkle"></div>
+  </button>
+</div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    // ===== MUSIC PLAYER FUNCTIONALITY =====
+    let isPlaying = false;
+    const bgMusic = document.getElementById('bg-music');
+    const musicControl = document.querySelector('.music-control');
+
+    function toggleMusic() {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicControl.innerHTML = '<i class="fas fa-music"></i><span class="music-text">Play Music</span>';
+      } else {
+        bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+        musicControl.innerHTML = '<i class="fas fa-volume-up"></i><span class="music-text">Pause Music</span>';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Initialize music with user interaction
+    document.addEventListener('click', function initMusic() {
+      if (!isPlaying) {
+        bgMusic.volume = 0.5;
+        isPlaying = true;
+        bgMusic.play().catch(e => console.log("Music autoplay prevented"));
+        musicControl.innerHTML = '<i class="fas fa-volume-up"></i><span class="music-text">Pause Music</span>';
+      }
+      document.removeEventListener('click', initMusic);
+    }, { once: true });
+
+    // ===== PAGE NAVIGATION =====
+    function nextPage(num) {
+      const currentPage = document.querySelector('.page.active');
+      if (currentPage) {
+        currentPage.style.opacity = '0';
+        currentPage.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+          document.querySelectorAll('.page').forEach(p => {
+            p.classList.remove('active');
+            p.style.opacity = '';
+            p.style.transform = '';
+          });
+          
+          const nextPageEl = document.getElementById('page' + num);
+          nextPageEl.classList.add('active');
+          
+          nextPageEl.style.animation = 'pageFadeIn 0.8s ease';
+          setTimeout(() => {
+            nextPageEl.style.animation = '';
+          }, 800);
+          
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          createSparkles();
+        }, 300);
+      }
+    }
+
+    // ===== CREATE SPARKLE EFFECT =====
+    function createSparkles() {
+      const sparkles = document.createElement('div');
+      sparkles.className = 'sparkle-effect';
+      sparkles.innerHTML = '✦✦✦';
+      sparkles.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3em;
+        color: #ff4d6d;
+        z-index: 1000;
+        pointer-events: none;
+        opacity: 0;
+        animation: sparkleAnim 1s ease-out;
+      `;
+      
+      document.body.appendChild(sparkles);
+      
+      setTimeout(() => {
+        sparkles.remove();
+      }, 1000);
+    }
+
+    // ===== LETTER OPENING ANIMATION =====
+    function openLetter() {
+      const letter = document.querySelector('.letter');
+      const message = document.querySelector('.message');
+      const envelopeFlap = document.querySelector('.envelope-flap');
+      
+      if (letter.classList.contains('opened')) {
+        letter.classList.remove('opened');
+        envelopeFlap.style.transform = 'rotateX(0deg)';
+        message.style.display = 'none';
+      } else {
+        letter.classList.add('opened');
+        envelopeFlap.style.transform = 'rotateX(180deg)';
+        
+        setTimeout(() => {
+          message.style.display = 'block';
+          
+          for (let i = 0; i < 10; i++) {
+            createFloatingHeart();
+          }
+        }, 600);
+      }
+    }
+
+    // ===== CREATE FLOATING HEARTS =====
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.innerHTML = '❤️';
+      heart.style.cssText = `
+        position: fixed;
+        font-size: ${Math.random() * 20 + 15}px;
+        top: 70%;
+        left: ${Math.random() * 100}%;
+        opacity: 0;
+        z-index: 1000;
+        pointer-events: none;
+        animation: floatUp ${Math.random() * 2 + 2}s ease-in-out forwards;
+      `;
+      
+      document.body.appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 3000);
+    }
+
+   function roseMessage(num) {
+  const msg = document.getElementById("roseMsg");
+  const roseOptions = document.querySelectorAll('.rose-option');
+  
+  roseOptions.forEach(rose => {
+    rose.style.transform = 'scale(0.95)';
+    rose.style.opacity = '0.7';
+  });
+  
+  const selectedRose = roseOptions[num - 1];
+  if (selectedRose) {
+    selectedRose.style.transform = 'scale(1.2)';
+    selectedRose.style.opacity = '1';
+    selectedRose.style.boxShadow = '0 25px 60px rgba(214, 51, 108, 0.4)';
+    
+    const sparkle = selectedRose.querySelector('.rose-sparkle');
+    if (sparkle) {
+      sparkle.style.opacity = '1';
+      sparkle.style.animation = 'sparkle 1s ease-in-out';
+    }
+  }
+  
+  let message = '';
+  let delay = 500;
+  
+  switch(num) {
+    case 1:
+      message = "This rose is for the smiles we share 🌸";
+      break;
+    case 2:
+      message = "This rose holds all my quiet feelings 💭";
+      break;
+    case 3:
+      message = "This rose is for every moment that feels like home 🏡";
+      break;
+    case 4:
+      message = "This rose blooms with warmth and care 💗";
+      break;
+    case 5:
+      message = `You found the special rose! 🌹✨<br><br>
+                This rose carries my deepest feelings and endless love.<br>
+                <button class="magic-btn accept-btn" onclick="nextPage(5)">
+                  <span class="btn-text">Accept the Rose 💖</span>
+                  <div class="btn-sparkle"></div>
+                </button>`;
+      delay = 800;
+      createCelebration();
+      break;
+  }
+  
+  setTimeout(() => {
+    msg.innerHTML = '';
+    msg.style.opacity = '0';
+    
+    setTimeout(() => {
+      msg.innerHTML = message;
+      msg.style.opacity = '1';
+      
+      // ✅ ADD "SELECT AGAIN" BUTTON FOR NON-SPECIAL ROSES
+      if (num !== 5) {
+        message += '<br><br><button class="magic-btn" onclick="resetRoseSelection()" style="margin-top: 20px;"><span class="btn-text">🌹 Select Again</span><div class="btn-sparkle"></div></button>';
+        msg.innerHTML = message;
+        typeWriterEffect(msg);
+      }
+      
+      // ✅ SCROLL TO MESSAGE (ESPECIALLY IMPORTANT ON MOBILE)
+      setTimeout(() => {
+        const messageContainer = document.querySelector('.rose-message-container');
+        if (messageContainer) {
+          messageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 400);
+      
+      if (num !== 5) {
+        setTimeout(() => {
+          roseOptions.forEach(rose => {
+            rose.style.transform = '';
+            rose.style.opacity = '';
+            rose.style.boxShadow = '';
+            const sparkle = rose.querySelector('.rose-sparkle');
+            if (sparkle) {
+              sparkle.style.opacity = '';
+              sparkle.style.animation = '';
+            }
+          });
+        }, 2000);
+      }
+    }, 300);
+  }, delay);
+}
+
+// ✅ NEW FUNCTION: RESET ROSE SELECTION
+function resetRoseSelection() {
+  const msg = document.getElementById("roseMsg");
+  const roseOptions = document.querySelectorAll('.rose-option');
+  
+  // Reset message
+  msg.innerHTML = 'Choose a rose to reveal its message...';
+  msg.style.opacity = '1';
+  
+  // Reset all roses
+  roseOptions.forEach(rose => {
+    rose.style.transform = '';
+    rose.style.opacity = '';
+    rose.style.boxShadow = '';
+    const sparkle = rose.querySelector('.rose-sparkle');
+    if (sparkle) {
+      sparkle.style.opacity = '';
+      sparkle.style.animation = '';
+    }
+  });
+  
+  // Scroll back to roses
+  const roseGrid = document.querySelector('.rose-grid');
+  if (roseGrid) {
+    roseGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+
+    // ===== TYPEWRITER EFFECT =====
+    function typeWriterEffect(element) {
+      const text = element.textContent;
+      element.textContent = '';
+      let i = 0;
+      
+      function type() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 30);
+        }
+      }
+      
+      type();
+    }
+
+    // ===== CREATE CELEBRATION EFFECT =====
+    function createCelebration() {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          createFloatingHeart();
+        }, i * 100);
+      }
+      
+      const sparkles = document.createElement('div');
+      sparkles.className = 'celebration-sparkles';
+      sparkles.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                    rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 999;
+        animation: celebrationSparkle 2s ease-out;
+      `;
+      
+      sparkles.style.setProperty('--x', Math.random() * 100 + '%');
+      sparkles.style.setProperty('--y', Math.random() * 100 + '%');
+      
+      document.body.appendChild(sparkles);
+      
+      setTimeout(() => {
+        sparkles.remove();
+      }, 2000);
+    }
+
+    // ===== INITIALIZE FLOATING HEARTS =====
+    function initFloatingHearts() {
+      const heartsContainer = document.querySelector('.floating-hearts');
+      const heartsCount = 10;
+      
+      for (let i = 0; i < heartsCount; i++) {
+        const heart = document.createElement('span');
+        heart.innerHTML = '❤️';
+        heart.style.cssText = `
+          position: absolute;
+          font-size: ${Math.random() * 20 + 15}px;
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          opacity: ${Math.random() * 0.3 + 0.1};
+          animation: floatHeart ${Math.random() * 15 + 10}s linear infinite ${Math.random() * 5}s;
+        `;
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    // ===== INITIALIZE TWINKLING STARS =====
+    function initTwinklingStars() {
+      const starsContainer = document.querySelector('.twinkling-stars');
+      const starsCount = 20;
+      
+      for (let i = 0; i < starsCount; i++) {
+        const star = document.createElement('span');
+        star.innerHTML = '✦';
+        star.style.cssText = `
+          position: absolute;
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          font-size: ${Math.random() * 12 + 8}px;
+          color: #ff${Math.floor(Math.random() * 100 + 150)}c6;
+          animation: twinkle ${Math.random() * 3 + 2}s infinite alternate ${Math.random() * 2}s;
+        `;
+        starsContainer.appendChild(star);
+      }
+    }
+
+    // ===== FLOATING HEART ANIMATION =====
+    const floatHeartStyle = document.createElement('style');
+    floatHeartStyle.textContent = `
+      @keyframes floatHeart {
+        0% {
+          transform: translateY(100vh) rotate(0deg) scale(0.5);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.3;
+        }
+        90% {
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-100px) rotate(360deg) scale(1);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(floatHeartStyle);
+
+    // ===== INITIALIZE ON PAGE LOAD =====
+   // ===== GO TO HOME PAGE =====
+function goToHome() {
+  // Change '../index.html' to your actual home page path
+  window.location.href = '../index.html';
+}
+
+// ===== INITIALIZE ON PAGE LOAD =====
+document.addEventListener('DOMContentLoaded', function() {
+  initFloatingHearts();
+  initTwinklingStars();
+});
+
+  </script>
+</body>
+</html>

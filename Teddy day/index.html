@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Teddy Day 🧸 | A Special Gift</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary-pink: #ff4d88;
+      --secondary-pink: #ff7eb3;
+      --light-pink: #ffd6e8;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(255, 77, 136, 0.2);
+      --gradient: linear-gradient(135deg, #ffd6e8 0%, #ffe8f2 50%, #ffffff 100%);
+    }
+
+   body {
+    margin: 0;
+    background: var(--gradient);
+    overflow-x: hidden;
+    overflow-y: auto;  /* ✅ ADDED THIS LINE */
+    min-height: 100vh;
+    position: relative;
+    transition: background 1s ease;
+}
+
+
+    /* ===== BACKGROUND ELEMENTS ===== */
+    .floating-teddies {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-teddy {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.15;
+      animation: float-teddy 25s infinite linear;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    @keyframes float-teddy {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.8);
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg) scale(1);
+      }
+    }
+
+    /* ===== PAGE TRANSITIONS ===== */
+   .page {
+    display: none;
+    min-height: 100vh;  /* ✅ CHANGED FROM height TO min-height */
+    width: 100vw;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;  /* ✅ ADDED THIS LINE */
+}
+
+
+    .page.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page.exiting {
+      opacity: 0 !important;
+      transform: translateY(-30px) !important;
+      transition: opacity 0.4s ease, transform 0.4s ease !important;
+    }
+
+   .page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;  /* ✅ CHANGED FROM height: 100% TO min-height: 100vh */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+
+    /* ===== TYPOGRAPHY ===== */
+    .main-title {
+      color: var(--primary-pink);
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-shadow: 0 4px 12px rgba(255, 77, 136, 0.3);
+      position: relative;
+      display: inline-block;
+      animation: title-glow 3s infinite alternate;
+    }
+
+    @keyframes title-glow {
+      0% {
+        text-shadow: 0 4px 12px rgba(255, 77, 136, 0.3);
+      }
+      100% {
+        text-shadow: 0 4px 20px rgba(255, 77, 136, 0.6),
+                     0 0 30px rgba(255, 77, 136, 0.2);
+      }
+    }
+
+    .page-title {
+      color: var(--primary-pink);
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: var(--secondary-pink);
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .page-subtitle {
+      color: #666;
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+      padding: 18px 35px;
+      border-radius: 50px;
+      color: var(--white);
+      display: inline-block;
+      box-shadow: var(--shadow);
+      margin: 30px 0;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: var(--shadow);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(255, 77, 136, 0.4);
+      }
+    }
+
+    .glow {
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: var(--shadow);
+      }
+      to {
+        box-shadow: 0 15px 40px rgba(255, 77, 136, 0.5),
+                    0 0 60px rgba(255, 77, 136, 0.2);
+      }
+    }
+
+    /* ===== TEDDY CONTAINERS ===== */
+    .teddy-container {
+      position: relative;
+      margin: 40px 0;
+    }
+
+    .teddy-image {
+      width: 280px;
+      height: 280px;
+      object-fit: contain;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transition: all 0.5s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .floating {
+      animation: gentle-float 4s ease-in-out infinite;
+    }
+
+    @keyframes gentle-float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      33% {
+        transform: translateY(-20px) rotate(2deg);
+      }
+      66% {
+        transform: translateY(-10px) rotate(-2deg);
+      }
+    }
+
+    .teddy-image:hover {
+      transform: scale(1.08) rotate(5deg);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      animation-play-state: paused;
+    }
+
+    .teddy-shadow {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 40px;
+      background: radial-gradient(ellipse at center, 
+                  rgba(0,0,0,0.2) 0%, 
+                  rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    /* ===== BUTTONS ===== */
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .next-btn {
+      background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+      color: var(--white);
+      padding: 18px 45px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow);
+      margin-top: 30px;
+      min-width: 200px;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(255, 77, 136, 0.4);
+    }
+
+    .next-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+                  transparent, 
+                  rgba(255, 255, 255, 0.4), 
+                  transparent);
+      transition: 0.6s;
+      z-index: -1;
+    }
+
+    .next-btn:hover::before {
+      left: 100%;
+    }
+
+    .heartbeat-btn {
+      animation: heartbeat 1.2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      25%, 75% {
+        transform: scale(1.1);
+      }
+    }
+
+    .gradient-btn {
+      background: linear-gradient(90deg, 
+                  var(--primary-pink), 
+                  #ff6fa5, 
+                  var(--secondary-pink));
+      background-size: 200% 100%;
+      animation: gradient-shift 3s infinite;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* ===== CHOICES ===== */
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 50px auto;
+      max-width: 900px;
+      flex-wrap: wrap;
+    }
+
+    .choice-item {
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .choice-item:hover {
+      transform: translateY(-15px);
+    }
+
+    .choice-img-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+
+    .choice-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .choice-item:hover .choice-img-wrapper img {
+      transform: scale(1.1);
+    }
+
+    .choice-hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, 
+                  transparent 50%, 
+                  rgba(255, 77, 136, 0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .choice-item:hover .choice-hover {
+      opacity: 1;
+    }
+
+    .choice-label {
+      color: var(--primary-pink);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    /* ===== TYPEWRITER ===== */
+    .typewriter-container {
+      width: 80%;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+
+    .type {
+      font-size: 1.4rem;
+      min-height: 100px;
+      color: var(--primary-pink);
+      font-weight: 500;
+      position: relative;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 77, 136, 0.1);
+    }
+
+    .type::after {
+      content: '|';
+      animation: blink 1s infinite;
+      font-weight: 300;
+      margin-left: 5px;
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0;
+      }
+    }
+
+    /* ===== ENVELOPE ===== */
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      margin: 50px 0;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .envelope:hover {
+      transform: translateY(-20px);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff7eb3, #ff4d88);
+      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      transform-origin: top;
+      transition: transform 0.6s ease;
+      z-index: 2;
+    }
+
+    .envelope:hover .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-body {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #ffffff, #ffe8f2);
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+    }
+
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--primary-pink);
+    }
+
+    .letter-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .letter .fa-heart {
+      font-size: 2rem;
+      animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* ===== FINAL BUTTONS ===== */
+    .final-buttons {
+      display: flex;
+      gap: 40px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .yes-btn {
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      padding: 20px 50px;
+      border-radius: 50px;
+      font-size: 1.4rem;
+      color: white;
+      box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3);
+      min-width: 180px;
+    }
+
+    .yes-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(76, 175, 80, 0.4);
+    }
+
+    .no-btn {
+      background: linear-gradient(135deg, #f44336, #e53935);
+      padding: 20px 50px;
+      border-radius: 50px;
+      font-size: 1.4rem;
+      color: white;
+      box-shadow: 0 15px 35px rgba(244, 67, 54, 0.3);
+      min-width: 180px;
+      position: relative;
+      transition: all 0.1s ease;
+    }
+
+    .no-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(244, 67, 54, 0.4);
+    }
+
+    /* ===== POPUP ===== */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-backdrop {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .popup-card {
+      background: linear-gradient(135deg, var(--white), var(--light-pink));
+      padding: 50px;
+      border-radius: 30px;
+      text-align: center;
+      width: 400px;
+      max-width: 90%;
+      position: relative;
+      z-index: 1001;
+      animation: popupEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      border: 3px solid rgba(255, 77, 136, 0.2);
+    }
+
+    @keyframes popupEntrance {
+      0% {
+        transform: scale(0.5) rotate(-15deg);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+    }
+
+    .heart-container {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .heart-beat {
+      font-size: 80px;
+      color: var(--primary-pink);
+      animation: heartbeat 1.2s infinite;
+      display: inline-block;
+    }
+
+    .heart-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      border: 3px solid var(--primary-pink);
+      border-radius: 50%;
+      animation: ringPulse 2s infinite;
+    }
+
+    @keyframes ringPulse {
+      0% {
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+      }
+      100% {
+        width: 150px;
+        height: 150px;
+        opacity: 0;
+      }
+    }
+
+    .popup-text {
+      font-size: 1.4rem;
+      color: #333;
+      margin: 30px 0;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--primary-pink);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s;
+      background: rgba(255, 77, 136, 0.1);
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 77, 136, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .popup-close-btn {
+      background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    /* ===== MUSIC PLAYER (SIMPLE TOGGLE) ===== */
+    .music-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      border: 3px solid rgba(255, 77, 136, 0.2);
+      transition: all 0.3s ease;
+      animation: slideInRight 0.8s ease 0.5s both;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .music-toggle:hover {
+      transform: scale(1.1);
+      background: var(--light-pink);
+    }
+
+    .music-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .music-toggle i {
+      font-size: 1.5rem;
+      color: var(--primary-pink);
+    }
+
+    /* ===== PROGRESS INDICATOR ===== */
+    .progress-indicator {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px 25px;
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 77, 136, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-dot.active {
+      background: var(--primary-pink);
+      transform: scale(1.4);
+      box-shadow: 0 0 15px var(--primary-pink);
+    }
+
+    .progress-dot.active::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-pink);
+      animation: ripple 1.5s infinite;
+    }
+
+    @keyframes ripple {
+      0% {
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+      }
+      100% {
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+      }
+    }
+
+    /* ===== HEARTS ===== */
+    .hearts span {
+      position: fixed;
+      color: #ff6fa5;
+      animation: float-heart 6s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    @keyframes float-heart {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ===== CONFETTI ===== */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ===== EFFECTS ===== */
+    .petal-fall {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes petal-fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .love-rays {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      height: 350px;
+    }
+
+    .success-message {
+      animation: popupEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+
+    /* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    /* ✅ SCROLLING FIX FOR MOBILE */
+    .page {
+        min-height: 100vh;
+        overflow-y: auto;
+        padding: 20px 10px;
+    }
+    
+    .page-content {
+        min-height: 100vh;
+        padding: 30px 15px;
+    }
+    
+    /* Typography */
+    .main-title { font-size: 2.2rem; }
+    .page-title { font-size: 1.8rem; }
+    
+    /* Teddy Images */
+    .teddy-image { width: 220px; height: 220px; }
+    
+    /* Choices */
+    .choices { gap: 20px; }
+    .choice-img-wrapper { width: 120px; height: 120px; }
+    
+    /* Music Toggle */
+    .music-toggle { 
+        bottom: 20px; 
+        right: 20px; 
+        width: 55px; 
+        height: 55px; 
+    }
+    
+    /* Progress Indicator */
+    .progress-indicator { 
+        top: 20px; 
+        padding: 12px 20px; 
+    }
+    
+    /* Final Buttons */
+    .final-buttons { gap: 20px; }
+    .yes-btn, .no-btn { 
+        padding: 15px 35px; 
+        font-size: 1.2rem; 
+        min-width: 150px; 
+    }
+}
+
+
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 1.8rem;
+      }
+      
+      .page-title {
+        font-size: 1.5rem;
+      }
+      
+      .highlight {
+        padding: 15px 25px;
+        font-size: 1rem;
+      }
+      
+      .teddy-image {
+        width: 180px;
+        height: 180px;
+      }
+      
+      .next-btn {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        min-width: 180px;
+      }
+      
+      .final-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       🎵 MUSIC SLOT - ADD YOUR MUSIC FILE HERE
+       ========================================== -->
+  <!--
+       INSTRUCTIONS:
+       1. Add your music file (MP3 format recommended) to the same folder as this HTML file
+       2. Replace "YOUR_MUSIC_FILE.mp3" below with your actual filename
+       Example: <source src="love-theme.mp3" type="audio/mpeg">
+  -->
+  <audio id="bgMusic" loop>
+    <source src="./gif/music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Music Toggle Button -->
+  <div class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+    <i class="fas fa-volume-mute" id="musicIcon"></i>
+  </div>
+
+  <!-- Progress Indicator -->
+  <div class="progress-indicator" id="progressIndicator">
+    <!-- Dots will be added by JS -->
+  </div>
+
+  <!-- Background floating elements -->
+  <div class="floating-teddies" id="floatingTeddies"></div>
+
+  <!-- ==========================================
+       PAGE 1 – WELCOME
+       ========================================== -->
+  <div class="page active" id="page1">
+    <div class="page-content">
+      <div class="title-wrapper">
+        <h1 class="main-title">Happy Teddy Day 🧸</h1>
+        <div class="subtitle">A Special Gift Just For You</div>
+      </div>
+      <p class="highlight pulse">Someone cute has something special for you…</p>
+      <div class="teddy-container">
+        <!-- 🖼️ GIF SLOT 1 - Main Teddy (Welcome) -->
+        <!--
+             INSTRUCTIONS:
+             Replace src="PLACEHOLDER.gif" with your actual GIF filename
+             Example: <img src="teddy-welcome.gif" alt="Teddy Bear" class="teddy-image floating">
+        -->
+        <img src="./gif/teady1.gif" alt="Teddy Bear" class="teddy-image floating">
+        <div class="teddy-shadow"></div>
+      </div>
+      <button class="next-btn sparkle-btn" onclick="nextPage(2)">
+        <span>Open Gift 💝</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 2 – A LITTLE FEELING
+       ========================================== -->
+  <div class="page" id="page2">
+    <div class="page-content">
+      <h1 class="page-title fade-in">A Little Feeling 🌹</h1>
+      <div class="typewriter-container">
+        <p class="type" data-text="If I could give you one thing today, it would be a teddy that hugs you the way I want to 🤍"></p>
+      </div>
+      <div class="teddy-container">
+        <!-- 🖼️ GIF SLOT 2 - Rose Teddy -->
+        <!--
+             INSTRUCTIONS:
+             Replace src="PLACEHOLDER.gif" with your actual GIF filename
+             Example: <img src="rose-teddy.gif" alt="Rose Teddy" class="teddy-image floating">
+        -->
+        <img src="./gif/roseteady.gif" alt="Rose Teddy" class="teddy-image floating">
+        <div class="petal-fall"></div>
+      </div>
+      <button class="next-btn heartbeat-btn" onclick="nextPage(3)">
+        Next <i class="fas fa-heart"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 3 – CHOOSE A TEDDY
+       ========================================== -->
+  <div class="page" id="page3">
+    <div class="page-content">
+      <h1 class="page-title">Choose a Teddy 🧸</h1>
+      <p class="page-subtitle">Tap a teddy and feel the magic 💕</p>
+      <div class="choices">
+        <div class="choice-item" onclick="openPopup('You make my days softer 💖')">
+          <div class="choice-img-wrapper">
+            <!-- 🖼️ GIF SLOT 3 - Cuddly Teddy -->
+            <!--
+                 INSTRUCTIONS:
+                 Replace src="PLACEHOLDER.gif" with your actual GIF filename
+                 Example: <img src="cuddly-teddy.gif" alt="Teddy 1">
+            -->
+            <img src="./gif/teady1.gif" alt="Teddy 1">
+            <div class="choice-hover"></div>
+          </div>
+          <div class="choice-label">Cuddly Teddy</div>
+        </div>
+        <div class="choice-item" onclick="openPopup('I feel safe whenever I think of you 🥰')">
+          <div class="choice-img-wrapper">
+            <!-- 🖼️ GIF SLOT 4 - Hugging Teddy -->
+            <!--
+                 INSTRUCTIONS:
+                 Replace src="PLACEHOLDER.gif" with your actual GIF filename
+                 Example: <img src="hugging-teddy.gif" alt="Hugging Teddy">
+            -->
+            <img src="./gif/teadyhug.gif" alt="Hugging Teddy">
+            <div class="choice-hover"></div>
+          </div>
+          <div class="choice-label">Hugging Teddy</div>
+        </div>
+        <div class="choice-item" onclick="nextPage(4)">
+          <div class="choice-img-wrapper">
+            <!-- 🖼️ GIF SLOT 5 - Romantic Teddy -->
+            <!--
+                 INSTRUCTIONS:
+                 Replace src="PLACEHOLDER.gif" with your actual GIF filename (can be same as GIF SLOT 2)
+                 Example: <img src="rose-teddy.gif" alt="Rose Teddy">
+            -->
+            <img src="./gif/roseteady.gif" alt="Rose Teddy">
+            <div class="choice-hover"></div>
+          </div>
+          <div class="choice-label">Romantic Teddy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 4 – A WARM HUG
+       ========================================== -->
+  <div class="page" id="page4">
+    <div class="page-content">
+      <h1 class="page-title">A Warm Hug 🤍</h1>
+      <p class="highlight glow">This teddy carries all the hugs I wish I could give you 🫶</p>
+      <div class="teddy-container">
+        <!-- 🖼️ GIF SLOT 6 - Hugging Teddy (can be same as GIF SLOT 4) -->
+        <!--
+             INSTRUCTIONS:
+             Replace src="PLACEHOLDER.gif" with your actual GIF filename
+             Example: <img src="hugging-teddy.gif" alt="Hugging Teddy" class="teddy-image floating">
+        -->
+        <img src="./gif/teadyhug.gif" alt="Hugging Teddy" class="teddy-image floating">
+      </div>
+      <button class="next-btn gradient-btn" onclick="nextPage(5)">
+        One Last Thing 💌
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 5 – BEFORE YOU GO
+       ========================================== -->
+  <div class="page" id="page5">
+    <div class="page-content">
+      <h1 class="page-title">Before You Go 💖</h1>
+      <p class="highlight pulse">There is something my heart wants to ask you…</p>
+      <div class="envelope" onclick="nextPage(6)">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body">
+          <div class="letter">
+            <span class="letter-text">Open Me</span>
+            <i class="fas fa-heart"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 6 – FINAL QUESTION
+       ========================================== -->
+  <div class="page" id="page6">
+    <div class="page-content">
+      <h1 class="page-title">Will You Accept My Teddy Forever? 🧸💞</h1>
+      <div class="teddy-container">
+        <!-- 🖼️ GIF SLOT 7 - Final Hugging Teddy (can be same as GIF SLOT 4 or 6) -->
+        <!--
+             INSTRUCTIONS:
+             Replace src="PLACEHOLDER.gif" with your actual GIF filename
+             Example: <img src="hugging-teddy.gif" alt="Hugging Teddy" class="teddy-image floating">
+        -->
+        <img src="./gif/teadyhug.gif" alt="Hugging Teddy" class="teddy-image floating">
+        <div class="love-rays"></div>
+      </div>
+      <div class="final-buttons">
+        <button class="yes-btn celebration-btn" onclick="yesLove()">
+          <span>Yes 💖</span>
+        </button>
+        <button class="no-btn escape-btn" id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">
+          No 🙈
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       POPUP
+       ========================================== -->
+  <div class="popup" id="popup">
+    <div class="popup-backdrop" onclick="closePopup()"></div>
+    <div class="popup-card">
+      <span class="close-btn" onclick="closePopup()">×</span>
+      <div class="heart-container">
+        <div class="heart-beat">❤</div>
+        <div class="heart-ring"></div>
+      </div>
+      <p id="popupText" class="popup-text"></p>
+      <button class="popup-close-btn" onclick="closePopup()">
+        Close <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Hearts -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    // ===== GLOBAL VARIABLES =====
+    let currentPageNum = 1;
+    let heartInterval;
+    let isMusicPlaying = false;
+    let musicStarted = false;
+
+    // ===== MUSIC CONTROL (STARTS ON "OPEN GIFT" CLICK) =====
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+
+    function initMusic() {
+      music.volume = 0.7;
+      // Don't play automatically - wait for "Open Gift" button
+    }
+
+    function startMusicOnFirstInteraction() {
+      if (!musicStarted) {
+        music.play().then(() => {
+          musicStarted = true;
+          isMusicPlaying = true;
+          musicIcon.className = 'fas fa-volume-up';
+          console.log('🎵 Music started automatically!');
+        }).catch(error => {
+          console.log('Music play failed:', error);
+          // If autoplay fails, user can still use toggle button
+        });
+      }
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicIcon.className = 'fas fa-volume-up';
+        isMusicPlaying = true;
+        musicStarted = true;
+      } else {
+        music.pause();
+        musicIcon.className = 'fas fa-volume-mute';
+        isMusicPlaying = false;
+      }
+    }
+
+    // ===== PAGE NAVIGATION =====
+    function nextPage(num) {
+      // Start music when going to page 2 (clicking "Open Gift")
+      if (num === 2) {
+        startMusicOnFirstInteraction();
+      }
+      
+      const currentPage = document.querySelector('.page.active');
+      if (currentPage) {
+        currentPage.classList.add('exiting');
+        
+        setTimeout(() => {
+          currentPage.classList.remove('active', 'exiting');
+          currentPage.style.opacity = '0';
+          currentPage.style.transform = 'translateY(30px)';
+        }, 400);
+      }
+      
+      updateProgressIndicator(num);
+      
+      setTimeout(() => {
+        const nextPageEl = document.getElementById('page' + num);
+        nextPageEl.classList.add('active');
+        nextPageEl.style.opacity = '1';
+        nextPageEl.style.transform = 'translateY(0)';
+        
+        startTyping();
+        createPageEffects(num);
+        
+        currentPageNum = num;
+      }, 500);
+    }
+
+    function goToPage(num) {
+      if (num >= 1 && num <= 6 && num !== currentPageNum) {
+        nextPage(num);
+      }
+    }
+
+    // ===== PROGRESS INDICATOR =====
+    function initProgressIndicator() {
+      const indicator = document.getElementById('progressIndicator');
+      indicator.innerHTML = '';
+      
+      for (let i = 1; i <= 6; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'progress-dot';
+        dot.id = 'dot' + i;
+        dot.onclick = () => goToPage(i);
+        indicator.appendChild(dot);
+      }
+      
+      updateProgressIndicator(1);
+    }
+
+    function updateProgressIndicator(num) {
+      document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+        if (index < num) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    // ===== TYPING EFFECT =====
+    function startTyping() {
+      const el = document.querySelector('.page.active .type');
+      if (!el || el.dataset.done) return;
+      
+      const text = el.dataset.text;
+      let i = 0;
+      el.dataset.done = true;
+      el.innerHTML = '';
+      
+      const interval = setInterval(() => {
+        el.innerHTML += text.charAt(i);
+        i++;
+        
+        if (i >= text.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            el.style.animation = 'none';
+          }, 500);
+        }
+      }, 50);
+    }
+
+    // ===== POPUP =====
+    function openPopup(text) {
+      document.getElementById('popupText').innerText = text;
+      const popup = document.getElementById('popup');
+      popup.style.display = 'flex';
+      
+      createConfettiBurst(50);
+    }
+
+    function closePopup() {
+      const popup = document.getElementById('popup');
+      popup.style.animation = 'fadeOut 0.3s ease';
+      
+      setTimeout(() => {
+        popup.style.display = 'none';
+        popup.style.animation = '';
+      }, 300);
+    }
+
+    // ===== NO BUTTON ESCAPE =====
+    function moveNo() {
+      const btn = document.getElementById('noBtn');
+      const maxX = window.innerWidth - btn.offsetWidth - 20;
+      const maxY = window.innerHeight - btn.offsetHeight - 20;
+      
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+      
+      btn.style.position = 'fixed';
+      btn.style.left = randomX + 'px';
+      btn.style.top = randomY + 'px';
+      
+      const rotation = Math.random() * 30 - 15;
+      btn.style.transform = `translateY(-5px) rotate(${rotation}deg)`;
+      
+      createPoofEffect(randomX + btn.offsetWidth/2, randomY + btn.offsetHeight/2);
+    }
+
+    function createPoofEffect(x, y) {
+      for (let i = 0; i < 8; i++) {
+        const poof = document.createElement('div');
+        poof.style.cssText = `
+          position: fixed;
+          left: ${x}px;
+          top: ${y}px;
+          width: 6px;
+          height: 6px;
+          background: #ff4d88;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 1000;
+        `;
+        
+        document.body.appendChild(poof);
+        
+        const angle = (i / 8) * Math.PI * 2;
+        const distance = 40 + Math.random() * 40;
+        const duration = 400 + Math.random() * 300;
+        
+        poof.animate([
+          {
+            transform: 'translate(0, 0) scale(1)',
+            opacity: 1
+          },
+          {
+            transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+            opacity: 0
+          }
+        ], {
+          duration: duration,
+          easing: 'ease-out'
+        }).onfinish = () => poof.remove();
+      }
+    }
+
+    // ===== YES BUTTON CELEBRATION =====
+    function yesLove() {
+      createConfettiBurst(200);
+      
+      document.body.style.background = 'linear-gradient(135deg, #ffd6e8 0%, #ffcce0 50%, #ffb8d9 100%)';
+      
+      createCelebrationText();
+      
+      clearInterval(heartInterval);
+      heartInterval = setInterval(() => {
+        createFloatingHeart();
+        createFloatingHeart();
+      }, 200);
+      
+      setTimeout(() => {
+        const successMessage = document.createElement('div');
+        successMessage.className = 'success-message';
+        successMessage.innerHTML = `
+          <h2 style="color: #ff4d88; font-size: 2rem; margin-bottom: 15px;">🎉 Yayyy! 🎉</h2>
+          <p style="font-size: 1.2rem; color: #666; margin: 10px 0;">You just made this Teddy very happy! 💖</p>
+          <p style="font-size: 1.1rem; color: #888;">You accepted the teddy forever! 🧸💕</p>
+        `;
+        successMessage.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: white;
+          padding: 40px;
+          border-radius: 25px;
+          text-align: center;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+          z-index: 1001;
+          max-width: 90%;
+        `;
+        
+      // ✅ BUTTON CONTAINER FOR MULTIPLE BUTTONS
+const buttonContainer = document.createElement('div');
+buttonContainer.style.cssText = `
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+`;
+
+// Close Button
+const closeBtn = document.createElement('button');
+closeBtn.textContent = 'Close 🎀';
+closeBtn.onclick = () => successMessage.remove();
+closeBtn.style.cssText = `
+  background: linear-gradient(135deg, #ff4d88, #ff7eb3);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 77, 136, 0.3);
+`;
+closeBtn.onmouseover = () => {
+  closeBtn.style.transform = 'translateY(-3px)';
+  closeBtn.style.boxShadow = '0 8px 20px rgba(255, 77, 136, 0.4)';
+};
+closeBtn.onmouseout = () => {
+  closeBtn.style.transform = 'translateY(0)';
+  closeBtn.style.boxShadow = '0 5px 15px rgba(255, 77, 136, 0.3)';
+};
+
+// ✅ START OVER BUTTON
+const startOverBtn = document.createElement('button');
+startOverBtn.innerHTML = '<i class="fas fa-redo"></i> Start Over';
+startOverBtn.onclick = () => {
+  successMessage.remove();
+  // Reset the page and go back to page 1
+  document.body.style.background = 'linear-gradient(135deg, #ffd6e8 0%, #ffe8f2 50%, #ffffff 100%)';
+  clearInterval(heartInterval);
+  document.getElementById('hearts').innerHTML = '';
+  nextPage(1);
+};
+startOverBtn.style.cssText = `
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+`;
+startOverBtn.onmouseover = () => {
+  startOverBtn.style.transform = 'translateY(-3px)';
+  startOverBtn.style.boxShadow = '0 8px 20px rgba(255, 152, 0, 0.4)';
+};
+startOverBtn.onmouseout = () => {
+  startOverBtn.style.transform = 'translateY(0)';
+  startOverBtn.style.boxShadow = '0 5px 15px rgba(255, 152, 0, 0.3)';
+};
+
+// ✅ HOME BUTTON
+const homeBtn = document.createElement('button');
+homeBtn.innerHTML = '<i class="fas fa-home"></i> Go Home';
+homeBtn.onclick = () => {
+  // Change '../index.html' to your actual home page path
+  window.location.href = '../index.html';
+};
+homeBtn.style.cssText = `
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+`;
+homeBtn.onmouseover = () => {
+  homeBtn.style.transform = 'translateY(-3px)';
+  homeBtn.style.boxShadow = '0 8px 20px rgba(76, 175, 80, 0.4)';
+};
+homeBtn.onmouseout = () => {
+  homeBtn.style.transform = 'translateY(0)';
+  homeBtn.style.boxShadow = '0 5px 15px rgba(76, 175, 80, 0.3)';
+};
+
+// Add all buttons to container
+buttonContainer.appendChild(closeBtn);
+buttonContainer.appendChild(startOverBtn);
+buttonContainer.appendChild(homeBtn);
+
+successMessage.appendChild(buttonContainer);
+document.body.appendChild(successMessage);
+
+
+      }, 1000);
+    }
+
+    function createCelebrationText() {
+      const text = document.createElement('div');
+      text.textContent = '🎊 CELEBRATION! 🎊';
+      text.style.cssText = `
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3rem;
+        color: #ff4d88;
+        font-weight: 800;
+        text-shadow: 0 0 30px rgba(255, 77, 136, 0.8);
+        z-index: 1000;
+        animation: bounce 1s infinite alternate;
+      `;
+      
+      document.body.appendChild(text);
+      setTimeout(() => text.remove(), 3000);
+    }
+
+    // ===== FLOATING HEARTS =====
+    function createFloatingHeart() {
+      const h = document.createElement('span');
+      h.innerHTML = '❤';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.fontSize = Math.random() * 25 + 15 + 'px';
+      h.style.color = getRandomHeartColor();
+      h.style.animationDuration = Math.random() * 4 + 3 + 's';
+      h.style.animationDelay = Math.random() * 2 + 's';
+      
+      document.getElementById('hearts').appendChild(h);
+      
+      setTimeout(() => h.remove(), 7000);
+    }
+
+    function getRandomHeartColor() {
+      const colors = ['#ff4d88', '#ff6fa5', '#ff99c2', '#ff3377', '#ff6699', '#ff8ab3'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    // ===== BACKGROUND ELEMENTS =====
+    function createFloatingTeddies() {
+      const container = document.getElementById('floatingTeddies');
+      const emojis = ['🧸', '🐻', '❤️', '💖', '🌸', '🎀', '✨', '🌟'];
+      
+      for (let i = 0; i < 20; i++) {
+        const teddy = document.createElement('div');
+        teddy.className = 'floating-teddy';
+        teddy.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        teddy.style.left = Math.random() * 100 + 'vw';
+        teddy.style.animationDelay = Math.random() * 10 + 's';
+        teddy.style.animationDuration = Math.random() * 15 + 20 + 's';
+        teddy.style.fontSize = Math.random() * 25 + 15 + 'px';
+        container.appendChild(teddy);
+      }
+    }
+
+    // ===== CONFETTI =====
+    function createConfettiBurst(count = 100) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => createConfettiPiece(), i * 10);
+      }
+    }
+
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = getRandomHeartColor();
+      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      
+      if (Math.random() > 0.5) {
+        confetti.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+      }
+      
+      document.getElementById('confettiContainer').appendChild(confetti);
+      
+      const size = Math.random() * 20 + 10;
+      confetti.style.width = size + 'px';
+      confetti.style.height = size + 'px';
+      
+      const animation = confetti.animate([
+        {
+          top: '-50px',
+          transform: `rotate(0deg) scale(1)`,
+          opacity: 1
+        },
+        {
+          top: '100vh',
+          transform: `rotate(${Math.random() * 720}deg) scale(0)`,
+          opacity: 0
+        }
+      ], {
+        duration: Math.random() * 2000 + 1000,
+        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+      });
+      
+      animation.onfinish = () => confetti.remove();
+    }
+
+    // ===== PAGE EFFECTS =====
+    function createPageEffects(pageNum) {
+      switch(pageNum) {
+        case 2:
+          createRosePetals();
+          break;
+        case 6:
+          createLoveRays();
+          break;
+      }
+    }
+
+    function createRosePetals() {
+      const container = document.querySelector('.petal-fall');
+      if (!container) return;
+      
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const petal = document.createElement('div');
+          petal.innerHTML = '🌸';
+          petal.style.cssText = `
+            position: absolute;
+            font-size: ${Math.random() * 20 + 15}px;
+            top: -30px;
+            left: ${Math.random() * 100}%;
+            animation: petal-fall ${Math.random() * 5 + 5}s linear infinite;
+            opacity: ${Math.random() * 0.5 + 0.3};
+            z-index: 0;
+          `;
+          container.appendChild(petal);
+        }, i * 300);
+      }
+    }
+
+    function createLoveRays() {
+      const rays = document.querySelector('.love-rays');
+      if (!rays) return;
+      
+      rays.innerHTML = '';
+      for (let i = 0; i < 8; i++) {
+        const ray = document.createElement('div');
+        ray.style.cssText = `
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 3px;
+          height: 150px;
+          background: linear-gradient(to bottom, transparent, #ff4d88);
+          transform-origin: top center;
+          transform: translate(-50%, -50%) rotate(${i * 45}deg);
+          opacity: 0.6;
+        `;
+        rays.appendChild(ray);
+      }
+    }
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+      initProgressIndicator();
+      createFloatingTeddies();
+      initMusic();
+      
+      heartInterval = setInterval(createFloatingHeart, 400);
+      
+      console.log('🎀 Teddy Day Website Loaded Successfully! 🧸');
+    });
+  </script>
+
+</body>
+</html>

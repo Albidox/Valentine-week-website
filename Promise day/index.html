@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Promise Day 💍</title>
+  
+  <style>
+    /* ========================================
+       BASE STYLES
+       ======================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+      text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="18" font-size="18">💖</text></svg>') 12 12, auto;
+    }
+
+    /* ========================================
+       CONTAINER & PAGE TRANSITIONS
+       ======================================== */
+    .container {
+      margin-top: 80px;
+      padding: 20px;
+      display: none;
+    }
+
+    .container.active {
+      display: block;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    h1 {
+      font-size: 42px;
+      color: #ff2e63;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 20px;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff9ecf; }
+      to { text-shadow: 0 0 20px #ff2e63; }
+    }
+
+    p {
+      font-size: 22px;
+      color: #444;
+      min-height: 80px;
+      margin: 20px auto;
+      max-width: 600px;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+
+    /* ========================================
+       GIF STYLES
+       ======================================== */
+    .gif {
+      width: 260px;
+      height: 260px;
+      margin: 20px auto;
+      border-radius: 20px;
+      animation: pulse 2s infinite;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(255, 46, 99, 0.3);
+      border: 5px solid white;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #ff2e63;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 18px;
+      margin-top: 20px;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #ff9ecf;
+      cursor: pointer;
+      border: none;
+      animation: bounce 2s infinite;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff2e63;
+      animation: none;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* ========================================
+       MUSIC CONTROLS
+       ======================================== */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px;
+      border-radius: 50%;
+      border: none;
+      background: white;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.2);
+      background: #ff2e63;
+      color: white;
+    }
+
+    .music-status {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      font-size: 12px;
+      color: #ff2e63;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: none;
+    }
+
+    /* ========================================
+       START OVERLAY
+       ======================================== */
+    .start-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 214, 232, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .start-overlay h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .start-overlay p {
+      font-size: 20px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .start-overlay .btn {
+      font-size: 24px;
+      padding: 15px 40px;
+    }
+
+    /* ========================================
+       FLOATING HEARTS
+       ======================================== */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #ff4d6d;
+      animation: float 6s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) rotate(0deg); opacity: 1; }
+      to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ========================================
+       SPARKLE CURSOR
+       ======================================== */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 18px;
+      animation: sparkleAnim 1s linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes sparkleAnim {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-20px) scale(0.5); }
+    }
+
+    /* ========================================
+       POPUP STYLING
+       ======================================== */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 1000;
+      animation: popupIn 0.5s ease;
+      max-width: 90%;
+      width: 400px;
+    }
+
+   @keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+
+    .popup h2 {
+      color: #ff2e63;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .yes-btn, .no-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 20px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    .yes-btn {
+      background: #ff2e63;
+      color: white;
+      box-shadow: 0 0 10px #ff9ecf;
+    }
+
+    .yes-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff2e63;
+    }
+
+    .no-btn {
+      background: #ccc;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .no-btn:hover {
+      background: #999;
+    }
+
+    /* ========================================
+       RESPONSIVE DESIGN
+       ======================================== */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .start-overlay h1 {
+        font-size: 36px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      .gif {
+        width: 220px;
+        height: 220px;
+      }
+
+      .btn {
+        font-size: 16px;
+        padding: 10px 25px;
+      }
+
+      .popup {
+        width: 85%;
+        padding: 20px;
+      }
+
+      .popup h2 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .start-overlay h1 {
+        font-size: 32px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .gif {
+        width: 180px;
+        height: 180px;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+
+      .music-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       🎵 MUSIC SLOT - ADD YOUR MUSIC FILE HERE
+       ========================================== -->
+  <!--
+       INSTRUCTIONS:
+       1. Add your music file (MP3 format recommended) to the same folder as this HTML file
+       2. Replace "YOUR_MUSIC_FILE.mp3" below with your actual filename
+       Example: <source src="romantic-music.mp3" type="audio/mp3">
+  -->
+  <audio id="bgMusic" loop>
+    <source src="./gif/music.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Music Control Button -->
+  <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🔊</button>
+  <div class="music-status" id="musicStatus">Music is playing ♪</div>
+
+  <!-- ==========================================
+       START OVERLAY
+       ========================================== -->
+  <div class="start-overlay" id="startOverlay">
+    <h1>💖 Happy Promise Day 💖</h1>
+    <p>Click anywhere to begin with music...</p>
+    <button class="btn" onclick="startExperience()">Start Journey 💌</button>
+  </div>
+
+  <!-- ==========================================
+       PAGE 1 – START / WELCOME
+       ========================================== -->
+  <div id="page1" class="container">
+    <h1>Happy Promise Day 💖</h1>
+    <!-- 🖼️ GIF SLOT 1 - Welcome/Promise GIF -->
+    <!--
+         INSTRUCTIONS:
+         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+         Example: <img src="promise-welcome.gif" class="gif" alt="Promise Day">
+    -->
+    <img src="./gif/promise1.gif" class="gif" alt="Promise Day">
+    <p>I have something special to promise you...</p>
+    <button class="btn" onclick="goToPage(2)">Start Reading 💌</button>
+  </div>
+
+  <!-- ==========================================
+       PAGE 2 – FIRST PROMISE
+       ========================================== -->
+  <div id="page2" class="container">
+    <h1>My First Promise 💖</h1>
+    <!-- 🖼️ GIF SLOT 2 - Love/Distance GIF -->
+    <!--
+         INSTRUCTIONS:
+         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+         Example: <img src="love.gif" class="gif" alt="Love">
+    -->
+    <img src="./gif/love.gif" class="gif" alt="Love">
+    <p id="text2">I promise... No matter how far we are, distance will never reduce my love for you. I will always love you forever and always ❤️</p>
+    <button class="btn" onclick="goToPage(3)">Next Promise 💞</button>
+  </div>
+
+  <!-- ==========================================
+       PAGE 3 – SECOND PROMISE
+       ========================================== -->
+  <div id="page3" class="container">
+    <h1>My Second Promise 🤍</h1>
+    <!-- 🖼️ GIF SLOT 3 - Support/Together GIF -->
+    <!--
+         INSTRUCTIONS:
+         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+         Example: <img src="together.gif" class="gif" alt="Together">
+    -->
+    <img src="./gif/promise1.gif" class="gif" alt="Together">
+    <p id="text3">I promise... I will always stand with you in every decision, in every situation and in every phase of life. No matter what happens, I am always with you. You will never face anything alone. 💍❤️</p>
+    <button class="btn" onclick="goToPage(4)">One More Promise 💌</button>
+  </div>
+
+  <!-- ==========================================
+       PAGE 4 – THIRD PROMISE
+       ========================================== -->
+  <div id="page4" class="container">
+    <h1>My Third Promise 💛</h1>
+    <!-- 🖼️ GIF SLOT 4 - Care/Protection GIF -->
+    <!--
+         INSTRUCTIONS:
+         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+         Example: <img src="care.gif" class="gif" alt="Care">
+    -->
+    <img src="./gif/tc1.gif" class="gif" alt="Care">
+    <p id="text4">I promise... I will always take care of you. I will wipe your tears, protect your smile, support your dreams and choose you every single day. No matter how hard life gets, I will never leave your side. You are my forever. 💖</p>
+    <button class="btn" onclick="goToPage(5)">Final Promise 💞</button>
+  </div>
+
+  <!-- ==========================================
+       PAGE 5 – FINAL PROMISE
+       ========================================== -->
+  <div id="page5" class="container">
+    <h1>My Final Promise 💍</h1>
+    <!-- 🖼️ GIF SLOT 5 - Forever/Eternal Love GIF -->
+    <!--
+         INSTRUCTIONS:
+         Replace src="PLACEHOLDER.gif" with your actual GIF filename
+         Example: <img src="forever.gif" class="gif" alt="Forever">
+    -->
+    <img src="./gif/love.gif" class="gif" alt="Forever">
+    <p id="text5">I promise to love you in every universe, every lifetime and every version of me. You are my forever and always. 💖✨</p>
+    <button class="btn" onclick="showPopup()">Open My Last Question 💌</button>
+  </div>
+
+  <!-- ==========================================
+       POPUP – FINAL QUESTION
+       ========================================== -->
+  <div class="popup" id="popup">
+    <h2>Will You Stay With Me Forever? 💖</h2>
+    <button class="yes-btn" onclick="yesClicked()">YES 💍</button>
+    <button class="no-btn" id="noBtn">NO 😏</button>
+  </div>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    // ===== MUSIC CONTROL =====
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const musicStatus = document.getElementById("musicStatus");
+    const startOverlay = document.getElementById("startOverlay");
+    let musicStarted = false;
+
+    // Initialize music with user interaction
+    function startExperience() {
+      startOverlay.style.display = 'none';
+      
+      // First user interaction - try to play music
+      music.volume = 0.7;
+      const playPromise = music.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Music started successfully
+          musicStarted = true;
+          musicBtn.innerHTML = '🔊';
+          showMusicStatus('Music is playing ♪');
+        }).catch(error => {
+          // Music couldn't start automatically
+          musicBtn.innerHTML = '🔇';
+          showMusicStatus('Click 🎵 to start music');
+        });
+      }
+      
+      // Show page 1
+      goToPage(1);
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicBtn.innerHTML = '🔊';
+        showMusicStatus('Music is playing ♪');
+      } else {
+        music.pause();
+        musicBtn.innerHTML = '🔇';
+        showMusicStatus('Music is paused');
+      }
+    }
+
+    function showMusicStatus(text) {
+      musicStatus.textContent = text;
+      musicStatus.style.display = 'block';
+      setTimeout(() => {
+        musicStatus.style.display = 'none';
+      }, 2000);
+    }
+
+    // ===== NAVIGATION =====
+    function goToPage(pageNum) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.container');
+      pages.forEach(page => page.classList.remove('active'));
+      
+      // Show selected page
+      const pageToShow = document.getElementById(`page${pageNum}`);
+      if (pageToShow) {
+        pageToShow.classList.add('active');
+        
+        // Scroll to top
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        
+        // Start typewriter effect for this page
+        startTypewriter(pageNum);
+        
+        // Trigger confetti on final page
+        if (pageNum === 5) {
+          setTimeout(() => {
+            confetti({
+              particleCount: 200,
+              spread: 120,
+              origin: { y: 0.6 }
+            });
+          }, 1000);
+        }
+      }
+    }
+
+    // ===== TYPEWRITER EFFECTS =====
+    function startTypewriter(pageNum) {
+      const texts = {
+        1: "",
+        2: "I promise... No matter how far we are, distance will never reduce my love for you. I will always love you forever and always ❤️",
+        3: "I promise... I will always stand with you in every decision, in every situation and in every phase of life. No matter what happens, I am always with you. You will never face anything alone. 💍❤️",
+        4: "I promise... I will always take care of you. I will wipe your tears, protect your smile, support your dreams and choose you every single day. No matter how hard life gets, I will never leave your side. You are my forever. 💖",
+        5: "I promise to love you in every universe, every lifetime and every version of me. You are my forever and always. 💖✨"
+      };
+
+      const element = document.getElementById(`text${pageNum}`);
+      const text = texts[pageNum];
+      
+      if (element && text) {
+        typeEffect(element, text);
+      }
+    }
+
+    function typeEffect(element, text, speed = 50) {
+      let i = 0;
+      element.innerHTML = "";
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    // ===== POPUP FUNCTIONS =====
+    function showPopup() {
+      document.getElementById("popup").style.display = "block";
+    }
+
+  function yesClicked() {
+  // Big confetti explosion
+  confetti({
+    particleCount: 400,
+    spread: 200,
+    origin: { y: 0.6 }
+  });
+  
+  // Multiple confetti bursts
+  setTimeout(() => confetti({
+    particleCount: 150,
+    angle: 60,
+    spread: 80,
+    origin: { x: 0 }
+  }), 250);
+  
+  setTimeout(() => confetti({
+    particleCount: 150,
+    angle: 120,
+    spread: 80,
+    origin: { x: 1 }
+  }), 500);
+  
+  // Hide the question popup
+  document.getElementById("popup").style.display = "none";
+  
+  // ✅ CREATE SUCCESS MESSAGE WITH BUTTONS
+  setTimeout(() => {
+    const successPopup = document.createElement('div');
+    successPopup.className = 'popup';
+    successPopup.style.display = 'block';
+    successPopup.innerHTML = `
+      <h2>🎉 Yayyyyy! 🎉</h2>
+      <p style="font-size: 20px; color: #666; margin: 20px 0;">
+        Forever Starts Now 💍✨
+      </p>
+      <p style="font-size: 18px; color: #888; margin-bottom: 30px;">
+        You just made this day even more special! 💖
+      </p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <button class="yes-btn" onclick="closeSuccess()" style="animation: none;">
+          Close 💕
+        </button>
+        <button class="yes-btn" onclick="startOver()" style="background: linear-gradient(135deg, #FF9800, #F57C00); animation: none;">
+          🔄 Start Over
+        </button>
+        <button class="yes-btn" onclick="goHome()" style="background: linear-gradient(135deg, #4CAF50, #388E3C); animation: none;">
+          🏠 Go Home
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(successPopup);
+  }, 1000);
+}
+
+// ✅ CLOSE SUCCESS POPUP
+function closeSuccess() {
+  const successPopup = document.querySelectorAll('.popup')[1]; // Get the second popup
+  if (successPopup) {
+    successPopup.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => successPopup.remove(), 300);
+  }
+}
+
+// ✅ START OVER FUNCTION
+function startOver() {
+  // Remove success popup
+  const successPopup = document.querySelectorAll('.popup')[1];
+  if (successPopup) successPopup.remove();
+  
+  // Reset to page 1
+  goToPage(1);
+  
+  // Small confetti for restart
+  confetti({
+    particleCount: 50,
+    spread: 60,
+    origin: { y: 0.6 }
+  });
+}
+
+// ✅ GO HOME FUNCTION
+function goHome() {
+  // Change '../index.html' to your actual home page path
+  window.location.href = '../index.html';
+}
+
+
+    // ===== MOVING NO BUTTON =====
+    const noBtn = document.getElementById("noBtn");
+    
+    // For desktop - mouseover
+    noBtn.addEventListener("mouseover", function() {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // For mobile - touchstart
+    noBtn.addEventListener("touchstart", function(e) {
+      e.preventDefault();
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // ===== FLOATING HEARTS =====
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }, 300);
+
+    // ===== SPARKLE CURSOR =====
+    document.addEventListener("mousemove", function(e) {
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      sparkle.innerHTML = "✨";
+      sparkle.style.left = e.pageX + "px";
+      sparkle.style.top = e.pageY + "px";
+      sparkle.style.opacity = Math.random() * 0.5 + 0.5;
+      sparkle.style.fontSize = Math.random() * 10 + 12 + "px";
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    });
+
+    // For mobile touch sparkles
+    document.addEventListener("touchmove", function(e) {
+      if (e.touches.length > 0) {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.innerHTML = "✨";
+        sparkle.style.left = e.touches[0].pageX + "px";
+        sparkle.style.top = e.touches[0].pageY + "px";
+        sparkle.style.opacity = Math.random() * 0.5 + 0.5;
+        sparkle.style.fontSize = Math.random() * 10 + 12 + "px";
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+          sparkle.remove();
+        }, 1000);
+      }
+    });
+
+    // ===== INITIALIZE =====
+    window.onload = function() {
+      // Show start overlay
+      startOverlay.style.display = 'flex';
+      
+      // Set volume
+      music.volume = 0.7;
+      
+      // Click anywhere on overlay to start
+      startOverlay.addEventListener('click', function(e) {
+        if (e.target === startOverlay) {
+          startExperience();
+        }
+      });
+    };
+  </script>
+
+</body>
+</html>
